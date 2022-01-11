@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.4 - 2022-01-07
+
+- Fixed a checkout scenario in which a subscription in the cart fails to be created even though the order is placed successfully.
+
 ## 2.8.3 - 2021-12-13
 
 - `MAJOR`: Stripe Checkout is no longer restricted to card payments, supports all alternative payment methods, including new methods ACSS Debit/Canadian PADs, Afterpay/Clearpay, BACS Direct Debit, AU BECS Direct Debit, Boleto and GrabPay.
