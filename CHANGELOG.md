@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.9.2 - 2022-01-27
+
+- Fixed a refunds error affecting orders which have multiple partial invoices.
+
 ## 2.9.0 - 2022-01-24
 
 - `New`: In Authorize Only mode, merchants can now create multiple partial invoices by using a saved card. Order items can therefore be billed and shipped separately from one another.
