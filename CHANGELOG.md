@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.9.0 - 2022-01-24
+
+- `New`: In Authorize Only mode, merchants can now create multiple partial invoices by using a saved card. Order items can therefore be billed and shipped separately from one another.
+- Webhook signatures are configured automatically.
+- Dropped support for Magento 2.2 and older.
+- Various improvements with the Wallet Button.
+- Time synchronization of Stripe Checkout session expiration time.
+
 ## 2.8.4 - 2022-01-07
 
 - Fixed a checkout scenario in which a subscription in the cart fails to be created even though the order is placed successfully.
