@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.9.3 - 2022-02-07
+
+- The automatic webhooks configuration will no longer setup webhooks for inactive API keys.
+- Saved cards created using the legacy Sources API can be deleted from the customer account section.
+- Fixed a recurring subscription orders issue with MSI (Multi-source inventory).
+- Fixed a GraphQL API crash.
+
 ## 2.9.2 - 2022-01-27
 
 - Fixed a refunds error affecting orders which have multiple partial invoices.
