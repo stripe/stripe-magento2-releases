@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.9.4 - 2022-03-04
+
+- From the Stripe Dashboard, marking an invoice as Void, Uncollectible or Paid outside Stripe, will update the Magento order status.
+- Updated CSP policy to allow loading from new Klarna domains at the checkout.
+- Subscription orders placed with Stripe Checkout can be migrated/updated with the CLI tool.
+- When configuring webhooks, the storefront URL is used instead of the Magento base URL.
+
 ## 2.9.3 - 2022-02-07
 
 - The automatic webhooks configuration will no longer setup webhooks for inactive API keys.
