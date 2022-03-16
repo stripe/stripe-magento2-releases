@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.9.5 - 2022-03-15
+
+- Improvements with automatic webhooks configuration.
+- Fixed an "Invalid shipping address" error when the Wallet Button is used at the checkout page.
+- Fixed subscription orders placed with the Wallet Button not creating recurring orders.
+- Fixed a data migration error for users of the former Cryozonic modules.
+
 ## 2.9.4 - 2022-03-04
 
 - From the Stripe Dashboard, marking an invoice as Void, Uncollectible or Paid outside Stripe, will update the Magento order status.
