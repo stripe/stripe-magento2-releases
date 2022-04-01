@@ -1,6 +1,6 @@
-## Stripe Magento 2 Module
+## Stripe Connector for Adobe Commerce (Magento 2)
 
-This repository provides releases of the Stripe Magento 2 module.
+This repository provides releases of the Stripe Connector for Adobe Commerce (Magento 2).
 
 * See the [documentation](https://stripe.com/docs/plugins/magento-2)
 * See the [license](LICENSE.md)
