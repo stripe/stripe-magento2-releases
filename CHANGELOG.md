@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.0 - 2022-04-05
+
+- `MAJOR`: Introducing Stripe's Payment Element; an embeddable UI component that lets you accept 20+ payment methods with a single integration. The new component replaces the legacy Stripe Elements based form for card payments, as well as all alternative payment methods. Stripe is now displayed as a single Magento payment method which can automatically adjust input fields, dynamically sort payment methods and optimize your checkout page for conversions. You can now enable new payment methods from your Stripe dashboard without the need to upgrade the Stripe module.
+- `New`: The Magento multishipping checkout flow has been rebuilt from scratch to support a single payment for all multishipping orders, improving performance and reducing customer authentication friction. 
+
 ## 2.9.5 - 2022-03-15
 
 - Improvements with automatic webhooks configuration.
