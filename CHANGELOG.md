@@ -1,5 +1,29 @@
 # Changelog
 
+## 3.1.1 - 2022-04-21
+
+- PHP 8.1 compatibility fix.
+
+## 3.1.0 - 2022-04-20
+
+- Added support for Magento 2.4.4 and PHP 8.1.
+- Added automatic email to the store General email for failed recurring subscription orders that fail to be placed.
+- Added support for saving ACH Debits payment methods.
+- Added multiple CLI commands to manage webhooks and events.
+- Added cron to check and automatically reconfigure webhooks when needed.
+- Added cron to automatically re-enable the webhook origin check on production mode if disabled and forgotten.
+- Improved handling of trial subscriptions purchase with regular products. When a regular product is purchased with a trial subscription, the trial subscription is invoiced and automatically refunded on the initial order.
+- Multiple improvements to Stripe Checkout refunds and order cancellations.
+- Improved the automatic webhooks configuration so that multiple Magento installations can use the same Stripe account.
+- Improved the Wallet Button display by showing it only once on the checkout page, i.e. if enabled separately, it is now hidden in the Payment Element.
+- Improved management of high risk payments with multishipping by allowing you to approve the payment from the Stripe dashboard to unhold all held multishipping orders.
+- Webhook configuration settings have been removed from the admin module configuration section.
+- Fixed duplicate order email after order placement.
+- Fixed invoice email not being sent after order placement.
+- Fixed an API crash with GraphQL order placements.
+- Fixed a manual agreements validation issue at the checkout.
+- Fixed a Wallet Button glitch which caused the payment form to be hidden at the checkout.
+
 ## 3.0.0 - 2022-04-05
 
 - `MAJOR`: Introducing Stripe's Payment Element; an embeddable UI component that lets you accept 20+ payment methods with a single integration. The new component replaces the legacy Stripe Elements based form for card payments, as well as all alternative payment methods. Stripe is now displayed as a single Magento payment method which can automatically adjust input fields, dynamically sort payment methods and optimize your checkout page for conversions. You can now enable new payment methods from your Stripe dashboard without the need to upgrade the Stripe module.
