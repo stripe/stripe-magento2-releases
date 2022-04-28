@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.1.2 - 2022-04-28
+
+- Added icons for the PayNow and Konbini payment methods.
+- Added global configuration option to disable the Wallet Button across all pages.
+- Added missing locale files.
+- Fixed compatibility issue with some themes that would cause the payment form to break at checkout.
+- Fixed issue with multi-shipping checkout link appearing despite being disabled in the settings.
+- Fixed an error in the CLI subscription migration command.
+- Fixed a UI issue in multi-shipping checkout when saved cards are displayed.
+
 ## 3.1.1 - 2022-04-21
 
 - PHP 8.1 compatibility fix.
