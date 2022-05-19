@@ -1,5 +1,22 @@
 # Changelog
 
+## 3.2.0 - 2022-05-18
+
+- Added the ability to re-collect CVC codes for saved cards at the checkout page. Configurable from the Magento admin. Enabling this setting helps reduce fraud and slightly improves authorization rates. Can be used as part of Stripe Radar rules.
+- After popular demand, the CardElement has been restored to the Magento admin for placing MOTO orders with new cards.
+- The PaymentElement has been added and is now available to customers at the My Payment Methods section.
+- Card de-duplication improvements, adding newer cards with the same number will replace the old card.
+- UI improvements at the My Subscriptions page when changing a subscription's default payment method.
+- Deprecated the SCA MOTO Exceptions setting from the Magento admin area. MOTO is now configured and used automatically if it is enabled on the Stripe account.
+- Less webhook warnings in the admin area; hidden as soon as the first webhook event arrives.
+- Email payment method icons are in PNG format (wider support for email clients).
+- Better error handling at the multi-shipping checkout page.
+- Fixed a problem where the Authorize Only setting would be ignored if a saved card was used.
+- Fixed the Wallet Button not displaying as a standalone payment method when Payments are disabled from the module configuration section.
+- Fixed saved payment methods not appearing at the checkout when a single trial subscription is in the cart.
+- Fixed a redirect problem when adding configurable products to the cart from the catalog page.
+
+
 ## 3.1.2 - 2022-04-28
 
 - Added icons for the PayNow and Konbini payment methods.
