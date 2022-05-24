@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.2.1 - 2022-05-24
+
+- Added full synchronization of customer billing and shipping addresses upon order placement.
+- Fixed 'Please specify a shipping method' error with the Wallet Button at the top section of the checkout page.
+- Fixed a webhooks race condition causing orders to switch from Processing status back to Pending status.
+- Fixed pending Konbini payments being treated as abandoned payments and canceled after a few hours.
+- Fixed a payment method deduplication crash.
+- Fixed duplicate new order email being sent out.
+
 ## 3.2.0 - 2022-05-18
 
 - Added the ability to re-collect CVC codes for saved cards at the checkout page. Configurable from the Magento admin. Enabling this setting helps reduce fraud and slightly improves authorization rates. Can be used as part of Stripe Radar rules.
