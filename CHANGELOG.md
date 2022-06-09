@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.2.2 - 2022-06-06
+
+- The payment element no longer collects the country or postcode at the checkout page. The Magento billing address is used for the payment.
+- The order status now switches to "Processing" synchronously with the payment. If webhooks cannot be delivered, the order status will still switch to Processing.
+- Fixed a form validation bug in the Magento admin new order page.
+- Fixed a Wallet Button error when 3D Secure is required at the product pages.
+- Fixed a scenario where if a customer logs in at the checkout, the successful payment in Stripe would have a Cart ID description, and the Magento order would remain in Pending status.
+
 ## 3.2.1 - 2022-05-24
 
 - Added full synchronization of customer billing and shipping addresses upon order placement.
