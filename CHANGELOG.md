@@ -1,5 +1,11 @@
 # Changelog
 
+
+## 3.2.3 - 2022-06-16
+
+- Fixed a form validation bug in the Magento admin new order page.
+- Fixed a bug when adding products to the cart from the catalog pages.
+
 ## 3.2.2 - 2022-06-06
 
 - The payment element no longer collects the country or postcode at the checkout page. The Magento billing address is used for the payment.
