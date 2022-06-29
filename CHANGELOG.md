@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.4 - 2022-06-29
+
+- Compatibility fix with Sendcloud platform, causing orders created externally by Sendcloud to be marked as multi-shipping orders.
+- Fixed a bug where logged in customers would not get a new order email after placing an order.
 
 ## 3.2.3 - 2022-06-16
 
@@ -10,7 +14,6 @@
 
 - The payment element no longer collects the country or postcode at the checkout page. The Magento billing address is used for the payment.
 - The order status now switches to "Processing" synchronously with the payment. If webhooks cannot be delivered, the order status will still switch to Processing.
-- Fixed a form validation bug in the Magento admin new order page.
 - Fixed a Wallet Button error when 3D Secure is required at the product pages.
 - Fixed a scenario where if a customer logs in at the checkout, the successful payment in Stripe would have a Cart ID description, and the Magento order would remain in Pending status.
 
