@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.2.5 - 2022-07-18
+
+- Fixed invoices created too soon in pending status. Invoices are now created in paid status upon receipt of the charge.succeeded event.
+- Fixed compatibility issue with the OneStepCheckout.com module not displaying the Wallet button at the checkout page.
+- Fixed a problem in Authorize Only mode where abandoned orders would not get canceled by cron.
+- Fixed a webhooks crash when creating recurring subscription orders.
+- Fixed a Magento admin error when placing MOTO orders.
+
 ## 3.2.4 - 2022-06-29
 
 - Compatibility fix with Sendcloud platform, causing orders created externally by Sendcloud to be marked as multi-shipping orders.
