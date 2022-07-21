@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.2.6 - 2022-07-20
+
+- Improved support for Traditional Chinese (Hong Kong and Taiwan).
+- Fixed compatibility issue between Apple Pay and Magento 2.4.4.
+- Fixed duplicate order emails being sent in some cases.
+- Fixed circular dependency error when adding products to the cart.
+- Various fixes and improvements for orders which include trial subscriptions.
+
 ## 3.2.5 - 2022-07-18
 
 - Fixed invoices created too soon in pending status. Invoices are now created in paid status upon receipt of the charge.succeeded event.
