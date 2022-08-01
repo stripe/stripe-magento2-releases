@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.2.7 - 2022-08-01
+
+- Improved support for certain OneStepCheckout modules. Dynamic updates to PaymentElement's billing address.
+- Fixed an error in the admin area when placing new orders on non-default stores.
+- Fixed a checkout page error when the customer has not specified a first name or last name in the Wallet Button modal.
+- Fixed a multi-shipping checkout bug causing items to be removed from the cart.
+- Fixed a webhooks crash when refunding a payment from the Stripe dashboard.
+- Fixed a PHP 8 error with certain card icon configurations.
+
 ## 3.2.6 - 2022-07-20
 
 - Improved support for Traditional Chinese (Hong Kong and Taiwan).
