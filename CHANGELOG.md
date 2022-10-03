@@ -1,5 +1,31 @@
 # Changelog
 
+## 3.3.0
+
+- Added support for subscription plan updates. Customers can switch from one subscription plan to another from the customer account section. Supported via the use of Magento configurable products.
+- Customers can change the shipping address and shipping method of active subscriptions from the customer account section. The difference in shipping cost and taxes is collected via the checkout page. No new orders are created during the update; and all future recurring orders have the new shipping details and new shipping cost.
+- Added support for prorations on virtual subscription upgrades or downgrades. Unused time on the current subscription and remaining time on the new subscription is taken into account to bill or refund the correct amount after a subscription upgrade or downgrade. Prorations can be enabled or disabled for subscription upgrades and subscription downgrades separately.
+- Added support for the Link payment method (https://link.co/). Customers can checkout faster with prefilled payment details.
+- Added a new API rate limiter for the module's exposed API endpoints. Can be configured and used as an additional fraud security tool.
+- Added the --interactive | -i option to the CLI stripe:webhooks:configure command. Merchants now have the option to select which store view domain will become their default webhooks endpoint.
+- New and improved webhooks processing system. Achieves parallel API request idempotency, logs errors in the database, and can retry failed events via cron jobs.
+- Improvements with automatic webhooks configuration. Endpoints are updated rather than re-created, and switching back and forth of Stripe accounts and modes will reuse the old configured endpoints.
+- Added support for partial refunds to the admin Invoicing payment method.
+- Changing the status of a Stripe invoice to Void from the Stripe dashboard will create a credit memo for that order.
+- Refunding payments from the Stripe dashboard will create credit memos which do not include any order items. Order items can either be shipped or returned to stock after the refund and before closing or completing the order.
+- Deprecated multiple subscriptions per order functionality. Only one subscription can be bought per order.
+- Added integration between Mageplaza OneStepCheckout and the AfterPay/Clearpay payment method.
+- Various checkout flow improvements when the payment fails and is retried. Fixes cases where the old order would remain in pending status instead of being canceled.
+- Compatibility fix with Magento 2.3.5 and older.
+- Added CSP policy for frame-ancestors, fixes a Safari 3D Secure problem.
+- Fixed a scenario where the order amount changes but the Apple Pay amount does not update to reflect the change.
+- Improved error handling for 2 cases in the Magento admin area.
+- Fixed a case where orders placed from the admin area using the Invoicing method would have a status of Payment Review instead of Pending Payment.
+- Fixed a case where the minicart contents would not be cleared after an order is placed.
+- Fixed address street line not being passed to Payment Element shipping address.
+- Fixed placing subscription orders with SEPA Debit via Stripe Checkout.
+- Fixed a GraphQL error when a 3D Secure card is used for an order.
+
 ## 3.2.8 - 2022-08-16
 
 - Compatibility fix with Adobe Commerce 2.4.4 at the Cart Price Rules page.
@@ -48,6 +74,7 @@
 
 - The payment element no longer collects the country or postcode at the checkout page. The Magento billing address is used for the payment.
 - The order status now switches to "Processing" synchronously with the payment. If webhooks cannot be delivered, the order status will still switch to Processing.
+- Fixed a form validation bug in the Magento admin new order page.
 - Fixed a Wallet Button error when 3D Secure is required at the product pages.
 - Fixed a scenario where if a customer logs in at the checkout, the successful payment in Stripe would have a Cart ID description, and the Magento order would remain in Pending status.
 
