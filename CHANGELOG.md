@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.3.1
+
+- Localization fixes for 6 locales. Afterpay is displayed as Clearpay in the UK.
+- Small checkout performance improvements.
+- Compatibility fix of API rate limiter with Magento 2.3.
+- Fixed a bug with expiring discount coupons for subscriptions.
+- Fixed a refunds problem when a partial invoice is issued and the order is canceled.
+- Fixed a GraphQL error when a 3D Secure card is used for an order.
+- Fixed statement descriptor configuration setting not being applied.
+- Fixed incorrect notification in admin that webhooks have not yet been configured.
+
 ## 3.3.0
 
 - Added support for subscription plan updates. Customers can switch from one subscription plan to another from the customer account section. Supported via the use of Magento configurable products.
@@ -24,7 +35,6 @@
 - Fixed a case where the minicart contents would not be cleared after an order is placed.
 - Fixed address street line not being passed to Payment Element shipping address.
 - Fixed placing subscription orders with SEPA Debit via Stripe Checkout.
-- Fixed a GraphQL error when a 3D Secure card is used for an order.
 
 ## 3.2.8 - 2022-08-16
 
