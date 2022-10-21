@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.3.2
+
+- Added admin and email icons for the Link payment method.
+- Improvements around GraphQL API flows.
+- Fixed duplicate emails being sent for admin orders.
+- Fixed a terms and conditions validation problem at the checkout page.
+
 ## 3.3.1
 
 - Localization fixes for 6 locales. Afterpay is displayed as Clearpay in the UK.
