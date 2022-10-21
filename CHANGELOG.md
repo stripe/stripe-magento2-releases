@@ -1,8 +1,11 @@
 # Changelog
 
-## 3.3.2
+## 3.3.3
 
 - Added admin and email icons for the Link payment method.
+
+## 3.3.2
+
 - Improvements around GraphQL API flows.
 - Fixed duplicate emails being sent for admin orders.
 - Fixed a terms and conditions validation problem at the checkout page.
