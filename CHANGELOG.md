@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.3.4
+
+- Added a payment method title for Stripe Checkout in the admin orders grid.
+- Cosmetic UI improvements with Onestepcheckout_Iosc.
+- Adjusted checkout validations to work with configurable subscriptions created with older versions of the module.
+- Fixed partial refunds for the admin Stripe Invoice payment method.
+
 ## 3.3.3
 
 - Added admin and email icons for the Link payment method.
