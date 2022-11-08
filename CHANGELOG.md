@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.3.5
+
+- The Link payment method can be used with Authorize Only mode.
+- Added helper CLI command stripe:cron:cancel-abandoned-payments.
+- The API rate limiter is disabled when Magento is in "developer" mode.
+- Fixed a user scenario causing orders to be stuck in Pending status.
+
 ## 3.3.4
 
 - Added a payment method title for Stripe Checkout in the admin orders grid.
