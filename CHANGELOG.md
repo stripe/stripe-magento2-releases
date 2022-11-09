@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.3.6
+
+- Fixed a webhooks crash which prevented recurring subscription orders from being created.
+- Added helper CLI command stripe:cron:retry-events.
+
 ## 3.3.5
 
 - The Link payment method can be used with Authorize Only mode.
