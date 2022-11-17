@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.7
+
+- Fixed recurring configurable subscription orders not being created after Magento deletes the expired quote from the database.
+- Fixed voucher payment methods OXXO, Konbini and Boleto not redirecting to the order success page.
+- Javascript compatibility fix with older versions of mobile Safari.
+
 ## 3.3.6
 
 - Fixed a webhooks crash which prevented recurring subscription orders from being created.
