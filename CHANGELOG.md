@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.3.8
+
+- The header title of the wallet buttons on the checkout page is renamed from "Chekcout with Google/Apple Pay" to "Checkout with digital wallet".
+- The API rate limiter is disabled by default on initial installations.
+- Added CLI command stripe:webhooks:automatic-configuration which can be used to enable or disable automatic webhooks configuration.
+- Improvements with checkout flow when a payment has failed and the cart changes.
+
 ## 3.3.7
 
 - Fixed recurring configurable subscription orders not being created after Magento deletes the expired quote from the database.
