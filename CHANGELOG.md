@@ -1,9 +1,14 @@
 # Changelog
 
+## 3.3.9
+
+- Store Credit and Gift Card fixes for Adobe Commerce.
+- GraphQL fixes for 3D Secure, example usage at https://github.com/snez/magento2-graphql-place-order/blob/master/3d_secure_registered.html.
+- Fixed a crash in the CLI command stripe:cron:retry-events.
+
 ## 3.3.8
 
 - The header title of the wallet buttons on the checkout page is renamed from "Chekcout with Google/Apple Pay" to "Checkout with digital wallet".
-- The API rate limiter is disabled by default on initial installations.
 - Added CLI command stripe:webhooks:automatic-configuration which can be used to enable or disable automatic webhooks configuration.
 - Improvements with checkout flow when a payment has failed and the cart changes.
 
