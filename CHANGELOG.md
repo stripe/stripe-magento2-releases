@@ -1,9 +1,20 @@
 # Changelog
 
+## 3.3.10
+
+- Added a webhooks endpoint exclusion rule for the Adobe Commerce "Web Restrictions" setting.
+- Added GraphQL examples under {module_directory}/examples/GraphQL/CardElement/.
+- Added customer telephone validations (20 digits max for certain API calls).
+- Added new database indexes which improve queries performance.
+- Reduced the frequency of webhook ping requests.
+- The cron tasks will not cancel abandoned payment intents which are not associated with a local order.
+- Fixed a Wallet button shipping address error occurring when the region does not exist in the database.
+- Some fixes with the subscription price migration command when migrating orders in bulk.
+
 ## 3.3.9
 
 - Store Credit and Gift Card fixes for Adobe Commerce.
-- GraphQL fixes for 3D Secure, example usage at https://github.com/snez/magento2-graphql-place-order/blob/master/3d_secure_registered.html.
+- GraphQL fixes for 3D Secure.
 - Fixed a crash in the CLI command stripe:cron:retry-events.
 
 ## 3.3.8
