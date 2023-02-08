@@ -1,6 +1,14 @@
 # Changelog
 
-## 3.3.10
+## 3.3.12
+
+- Fixed an error triggered when telephone numbers are optional.
+- Fixed a subscription upgrades problem affecting upgrades to subscriptions with different intervals.
+- Fixed the active cart not being restored correctly after a payment failure.
+- Fixed a scenario causing wallet payments to throw a country_id error.
+- Compatibility fix with a 3rd party Address Finder module.
+
+## 3.3.11
 
 - Added a webhooks endpoint exclusion rule for the Adobe Commerce "Web Restrictions" setting.
 - Added GraphQL examples under {module_directory}/examples/GraphQL/CardElement/.
