@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.3.13
+
+- When guest customers return from Stripe Checkout and change their email, it is updated on the customer object in Stripe and reflected in the next Stripe Checkout session.
+- After multiple partial refunds from the Stripe dashboard, close the order when the final refund reaches the order's grand total.
+- In the admin orders grid, renamed the title of "Send an invoice to the customer by email (via Stripe Billing)" to "Stripe Billing".
+- Various fixes with expiring discount coupons & rules for subscriptions.
+- Fixed a "Duplicate webhooks" warning displayed in the admin area for no reason.
+- Fixed a Google Pay issue with configurable products on older versions of Magento triggering a "Product quantity not available" error.
+- Fixed a PHP 8.1 compatibility error when reading the module configuration for wallet locations.
+- Fixed an error in the customer.subscription.updated webhooks observer.
+
 ## 3.3.12
 
 - Fixed an error triggered when telephone numbers are optional.
