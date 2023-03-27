@@ -1,5 +1,28 @@
 # Changelog
 
+## 3.4.0
+
+- Compatible with Magento 2.4.6.
+- Headless commerce: Simplified implementation flow for PWA apps, mobile apps and custom storefronts built with React, Vue or other front-end framework. Customer authentications are simplified and a wider number of payment methods are supported.
+- Improved Google Page Speed score. Up to 8 performance points improvement has been observed in tests.
+- No more pending orders for card payments and other synchronous payment methods. When a payment fails, there won't be a Pending/Canceled order in the admin area.
+- For asynchronous payment methods which require a redirect, the order will be created in Pending Payment status instead of Pending status. These orders can be managed by configuring Magento’s built-in “Pending Payment Order Lifetime”.
+- 95% reduction in incomplete payments in the Stripe dashboard. When customers arrive at the checkout page, no payments are created in Stripe in "Incomplete" status.
+- Under the My Payment Methods section, customers can now add several types of bank debits such as SEPA, ACSS, ACH etc.
+- The store view locale is synchronised on the Stripe customer's preferred locales. Stripe will issue invoices, receipts, and other customer facing emails to that customer with an appropriately translated email, payment page, or PDF. 15 languages are currently supported.
+- Subscriptions support for Bundled products. Regular items which are part of a subscription bundle, will be included in the final subscription price. The recurring subscription order will include the bundle item with all of the original sub-selections, instead of only the simple/virtual subscription product.
+- Migrating subscription prices with the CLI tool will update instead of re-create the subscription. The subscription status remains active instead of switching to trialing, and historical subscription data are preserved in the Stripe dashboard.
+- The My Payment Methods page is now an API-assisted uiComponent, improving loading time and performance.
+- Subscription prices are created in Stripe with a human readable name, i.e. "$15 every month". CSV exports and Stripe invoices display the price name.
+- Rejecting a fraudulent payment will set the order status to Suspected Fraud instead of Canceled.
+- GraphQL support for PaymentElement. GraphQL can be used to place orders with any alternative payment method such as Klarna, AfterPay, Apple Pay etc. An example front-end was added under {module_dir}/examples/GraphQL/PaymentElement/.
+- Added 3 new GraphQL mutations and REST APIs for adding, deleting and listing saved payment methods.
+- Added GraphQL support for saved card CVC tokens.
+- When creating order shipments from the admin, orders which are in Pending Payment status will remain in Pending Payment status instead of switching to Processing status.
+- Shipping trial subscription orders will switch them to Closed status instead of Processing status.
+- Changed what we consider a subscription upgrade/downgrade to be a simple subscription amount comparison. Changes in the billing interval are no longer taken into account.
+- Deprecated all CLI commands for Magento 1 to Magento 2 migrations.
+
 ## 3.3.13
 
 - When guest customers return from Stripe Checkout and change their email, it is updated on the customer object in Stripe and reflected in the next Stripe Checkout session.
