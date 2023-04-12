@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.4.1
+
+- Compatible with PHP 8.2.
+- Added configuration method for hiding Afterpay/Clearpay on virtual carts.
+- Fixed abandoned orders placed with the Affirm payment method not getting canceled.
+- Fixed a javascript crash at the My Payment Methods page.
+
 ## 3.4.0
 
 - Compatible with Magento 2.4.6.
