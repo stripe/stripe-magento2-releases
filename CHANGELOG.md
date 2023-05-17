@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.4.2
+
+- For asynchronous payment methods, the new order email is sent upon payment authrorization, rather than payment receipt. The invoice email is still sent on payment receipt.
+- The default/stripe_settings/payment_methods config.xml setting can be used to additionally hide types of saved payment methods.
+- When the redirect payment flow is enabled, the customer cart is additionally deactivated via webhooks, to handle scenarios where the customer never returns to the website.
+- Improved error handling with Stripe Checkout for unsupported currencies.
+- Prevent Magento 2.4.6 from redirecting to the shipping page after a card decline.
+- Compatibility fix with Amasty OSC.
+- Fixed an admin issue when re-ordering an old order, which would clear the ordered items from the page.
+- Fixed an issue in the Pending Payment Order Lifetime cron job, causing canceled orders for asynchronous payment methods that were in processing status.
+- Fixed a scenario where a trial subscription order placement would fail with error: This PaymentIntent's payment_method could not be updated.
+
 ## 3.4.1
 
 - Compatible with PHP 8.2.
