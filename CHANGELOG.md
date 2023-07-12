@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.4.3
+
+- When the "Save customer payment method" option is disabled, the "My Payment Methods" link will be hidden from the customer account section.
+- Added a data migration which cleans old settings for payment method filtering per country, applicable for users migrating from v2.x of the module.
+- Fixed a checkout crash with Wechat Pay.
+- Fixed an admin issue when re-ordering an existing order, which would in some cases not automatically populate the ordered items or customer email.
+- Fixed an issue where disabling regular card payments would prevent wallet buttons from initializing correctly.
+- Fixed a crash in the customer.subscription.updated webhooks observer.
+
 ## 3.4.2
 
 - For asynchronous payment methods, the new order email is sent upon payment authrorization, rather than payment receipt. The invoice email is still sent on payment receipt.
@@ -8,7 +17,6 @@
 - Improved error handling with Stripe Checkout for unsupported currencies.
 - Prevent Magento 2.4.6 from redirecting to the shipping page after a card decline.
 - Compatibility fix with Amasty OSC.
-- Fixed an admin issue when re-ordering an old order, which would clear the ordered items from the page.
 - Fixed an issue in the Pending Payment Order Lifetime cron job, causing canceled orders for asynchronous payment methods that were in processing status.
 - Fixed a scenario where a trial subscription order placement would fail with error: This PaymentIntent's payment_method could not be updated.
 
@@ -270,7 +278,7 @@
 ## 3.0.0 - 2022-04-05
 
 - `MAJOR`: Introducing Stripe's Payment Element; an embeddable UI component that lets you accept 20+ payment methods with a single integration. The new component replaces the legacy Stripe Elements based form for card payments, as well as all alternative payment methods. Stripe is now displayed as a single Magento payment method which can automatically adjust input fields, dynamically sort payment methods and optimize your checkout page for conversions. You can now enable new payment methods from your Stripe dashboard without the need to upgrade the Stripe module.
-- `New`: The Magento multishipping checkout flow has been rebuilt from scratch to support a single payment for all multishipping orders, improving performance and reducing customer authentication friction. 
+- `New`: The Magento multishipping checkout flow has been rebuilt from scratch to support a single payment for all multishipping orders, improving performance and reducing customer authentication friction.
 
 ## 2.9.5 - 2022-03-15
 
