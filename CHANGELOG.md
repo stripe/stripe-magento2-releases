@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.4.4
+
+- Added more examples on how to use the REST API with PaymentElement and CardElement.
+- Fixed recurring subscription orders re-activating the original cart that was used for the subscription purchase.
+- Fixed a data migration error when using table prefixes.
+
 ## 3.4.3
 
 - When the "Save customer payment method" option is disabled, the "My Payment Methods" link will be hidden from the customer account section.
