@@ -1,5 +1,26 @@
 # Changelog
 
+## 3.5.0
+
+- Added new checkout flow - "Payment action: Order". When the order is placed, only the payment method is saved without performing an authorization or capture. Orders can remain in Processing status for long durations, and be invoiced at any time to create the initial charge. Supports partial invoicing and works with both the Embedded flow (PaymentElement) as well as the Redirect flow (Stripe Checkout).
+- Orders that have been placed with the new "Order" payment action, can be edited from the Magento admin area. Merchants can change the ordered items, customer details and shipping details, and invoice the order using the same saved payment method used on the original order.
+- Added new "Bank Transfers" payment method, suitable for large payments that would otherwise be declined by the card networks. Customers can place an order and send funds to a Stripe temporary bank account, which automatically reconciles the funds to complete the payment.
+- Configurable, bundled, simple and virtual subscription products can be edited/changed by the customer from their account. Customers can change quantities, customizable options, configurable options, bundle options, shipping address, shipping method and payment method. Prorated billing for upgrades or downgrades can be enabled from the product configuration page, or globally from the module configuration.
+- Added support for subscription start dates and subscription schedules. Customers can be billed on the same date every month. Two modes are available to either start the subscription immediately and re-bill on the start date, or to delay the first payment until the start date. For the first option, prorated billing can be enabled.
+- Added support for the PaymentElement at the multi-shipping checkout flow. Customers can use cards, wallets and bank debits to place multi-shipping orders.
+- Canceled subscriptions are now displayed in the "My Subscriptions" customer account section, and can be re-activated by customers by clicking a "Reactivate" button.
+- Added support for PaymentElement's vertical/accordion layout, which works better on smaller column widths, typically used with OSC modules or mobile themes. Can be configured separately for desktop and mobile devices.
+- Added support for Stripe Checkout custom domains. The redirect flow can be used without the customer ever leaving your domain.
+- Added support for multiple "Payment Method Configurations". Each Magento store view can display different sets of payment methods, which are configured directly from the Stripe dashboard. This feature is currently available to limited Stripe accounts, and can be enabled from the etc/config.xml file.
+- Added "Stripe Payment Method" column in the admin orders grid, which displays the payment method type used for the order, i.e. Apple Pay, Klarna, Afterpay etc.
+- Added "Stripe Radar" column in the admin orders grid, showing the risk score for the payment.
+- Added support for dynamic taxes for subscriptions. When a tax rate changes in Magento, subscription prices are automatically updated to reflect the tax rate change.
+- When the "Save payment method" field is enabled, Stripe Checkout will no longer filter payment methods. If a payment method cannot be saved, it will still be available to the customer.
+- Prorated subscription downgrades no longer perform a refund on the original order. Instead they increase the customer's credit balance in Stripe, which is used to offset payments from future recurring subscription orders.
+- Performance optimizations for reduced API usage.
+- Improvements with automatic webhooks configuration.
+- Codebase refactor enabling easier customizations to the module.
+
 ## 3.4.4
 
 - Added more examples on how to use the REST API with PaymentElement and CardElement.
