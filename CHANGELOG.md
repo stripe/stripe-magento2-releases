@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.5.1
+
+- Added GraphQL API endpoint for retrieving the module's configuration.
+- Updated examples for headless commerce.
+- Fixed a compilation error affecting Commerce Cloud.
+- Fixed a card icons configuration issue for Stripe Checkout.
+- Various fixes and improvements for subscription purchases.
+
 ## 3.5.0
 
 - Added new checkout flow - "Payment action: Order". When the order is placed, only the payment method is saved without performing an authorization or capture. Orders can remain in Processing status for long durations, and be invoiced at any time to create the initial charge. Supports partial invoicing and works with both the Embedded flow (PaymentElement) as well as the Redirect flow (Stripe Checkout).
@@ -17,6 +25,7 @@
 - Added support for dynamic taxes for subscriptions. When a tax rate changes in Magento, subscription prices are automatically updated to reflect the tax rate change.
 - When the "Save payment method" field is enabled, Stripe Checkout will no longer filter payment methods. If a payment method cannot be saved, it will still be available to the customer.
 - Prorated subscription downgrades no longer perform a refund on the original order. Instead they increase the customer's credit balance in Stripe, which is used to offset payments from future recurring subscription orders.
+- Expiring coupon codes for subscriptions will now also work with cart price rules that do not have a configured coupon code.
 - Performance optimizations for reduced API usage.
 - Improvements with automatic webhooks configuration.
 - Codebase refactor enabling easier customizations to the module.
