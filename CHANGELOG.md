@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.5.2
+
+- Payment method configurations are out of beta and enabled by default. You can now enable different combinations of payment methods on each Magento store view.
+- When the Stripe API keys are invalid, wallets and the checkout payment methods are hidden.
+- Fixed a wallets issue at the multishipping checkout page.
+
 ## 3.5.1
 
 - Added GraphQL API endpoint for retrieving the module's configuration.
