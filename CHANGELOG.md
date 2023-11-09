@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.5.4
+
+- Fixed a refunds issue affecting configurable products that are partially refunded from the Stripe dashboard.
+- Fixed an error at the order shipment pages when the Stripe API keys for the store view are missing.
+
 ## 3.5.3
 
 - Fixed a compilation error affecting Adobe Commerce Cloud, introduced in v3.5.2.
