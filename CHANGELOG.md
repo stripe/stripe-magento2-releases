@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.5.5
+
+- Fixed a bug where an invalid payment method configuration would crash the payment element at the front-end.
+- Fixed payment method sort order only being applied to the redirect-based payment flow.
+- Fixed an md5() error when API keys on a store view are missing or misconfigured.
+- Fixed error 'The provided PaymentMethod was previously used with a PaymentIntent without Customer attachment', triggered by multiple card declines of the same payment method. Affects v3.5.1 - 3.5.4.
+
 ## 3.5.4
 
 - Fixed a refunds issue affecting configurable products that are partially refunded from the Stripe dashboard.
