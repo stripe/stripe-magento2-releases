@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.5.6
+
+- Payment form layout (vertical/horizontal) now also applies to the multishipping page.
+- Payment details are now displayed on shipment pages in the admin area.
+- Fixed a bug where the order total would display without the tax when tax inclusive prices are configured from the admin area.
+- Fixed expiring cart price rules for subscriptions being displayed as a refunds instead of a discounts on the recurring subscription orders.
+- Fixed a rounding error when using expiring coupons with tax inclusive subscription orders.
+- Fixed a bug causing payment method configurations to not have any effect at the front-end.
+- Fixed a bug with subscription dynamic taxes which could cause increases in subscription prices.
+
 ## 3.5.5
 
 - Fixed a bug where an invalid payment method configuration would crash the payment element at the front-end.
