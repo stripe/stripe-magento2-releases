@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.5.7
+
+- Recurring orders of configurable subscriptions will now include the parent configurable product instead of the child subscription product.
+- Improved handling of various cases of the admin Stripe Billing payment method: payment descriptions, metadata, transaction recording, refunds from Stripe Dashboard.
+- Fixed a bug with subscription dynamic taxes where the tax amount was not read correctly from configurable subscriptions.
+- Fixed the bank transfers payment method not being displayed when card payments are disabled.
+
 ## 3.5.6
 
 - Payment form layout (vertical/horizontal) now also applies to the multishipping page.
@@ -8,7 +15,6 @@
 - Fixed expiring cart price rules for subscriptions being displayed as a refunds instead of a discounts on the recurring subscription orders.
 - Fixed a rounding error when using expiring coupons with tax inclusive subscription orders.
 - Fixed a bug causing payment method configurations to not have any effect at the front-end.
-- Fixed a bug with subscription dynamic taxes which could cause increases in subscription prices.
 
 ## 3.5.5
 
