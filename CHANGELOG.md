@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.5.8
+
+- Fixed SEPA Direct Debit orders being created in Processing status before a payment is received.
+- Fixed PHP 7.4 compatibility issue affecting versions 3.5.6 and 3.5.7.
+- Fixed Magento 2.3.7 compatibility issue affecting versions 3.5.0 - 3.5.7.
+- Fixed 2 grand total issues at the sidebar.
+
 ## 3.5.7
 
 - Recurring orders of configurable subscriptions will now include the parent configurable product instead of the child subscription product.
