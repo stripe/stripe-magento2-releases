@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.5.9
+
+- Various 3D Secure customer authentication improvements around the "Order" payment action mode. Reduced likelyhood of a card being declined when the order is invoiced at a future date.
+- Guest orders placed with a wallet would show the customer name as "Guest" in the admin order view page. They will now show the full customer name.
+- Fixed an admin area error where if an order was placed with the Link payment method, and the authorization expired, then invoicing the order would fail with the error 'The provided PaymentMethod cannot be attached. To reuse a PaymentMethod, you must attach it to a Customer first.'
+- Fixed a payment method display issue at the front-end order view page.
+- Fixed a dynamic subscription taxes issue in the invoice.upcoming observer.
+
 ## 3.5.8
 
 - Fixed SEPA Direct Debit orders being created in Processing status before a payment is received.
