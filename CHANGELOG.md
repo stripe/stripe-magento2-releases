@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.5.10
+
+- PayPal and Amazon Pay now support the "Authorize Only" payment action.
+- Fixed an issue causing orders placed from the admin area with the Stripe Billing payment method to be stuck in Pending Payment. Affects versions 3.5.7 to 3.5.9.
+- When the 'Order' payment action is enabled, purchasing subscriptions with the Wallet Button would not set up the subscription correctly.
+- Fixed an issue with Link where if the 'Save payment method' is enabled, orders placed with Link would fail.
+- Fixed a checkout crash when using custom payment method configurations.
+
 ## 3.5.9
 
 - Various 3D Secure customer authentication improvements around the "Order" payment action mode. Reduced likelyhood of a card being declined when the order is invoiced at a future date.
