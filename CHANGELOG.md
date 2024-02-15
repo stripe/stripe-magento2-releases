@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.5.11
+
+- Various 3D Secure authentication improvements for subscriptions with future start dates.
+- Disabled Amazon Pay support for "Authorize Only" payment action.
+- Fixed a Wallet Button error when buying trial subscriptions with a payment method that requires 3DS.
+
 ## 3.5.10
 
 - PayPal and Amazon Pay now support the "Authorize Only" payment action.
