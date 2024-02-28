@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.5.12
+
+- Added support for 3-decimal point currencies (BHD, JOD, KWD, OMR, TND).
+- Added a cron job which periodically cleans old entries from large DB tables.
+- Payment method configurations which belong to Connect accounts are filtered out from the module configuration section.
+- Fixed a webhooks race condition causing the Total Due value of orders placed with the admin Stripe Billing payment method to remain positive after the invoice is paid.
+- Fixed an issue with the Boleto payment method, where the state code would not be passed correctly to the Stripe API.
+- Fixed a PHP 8 error with strpos().
+
 ## 3.5.11
 
 - Various 3D Secure authentication improvements for subscriptions with future start dates.
