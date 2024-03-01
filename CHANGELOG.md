@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.5.13
+
+- Updated the REST API headless commerce example for PaymentElement to correctly retrieve the PaymentIntent client_secret when customer authentication is required.
+- Fixed a PHP 7.4 backwards compatibility issue causing a crash at the checkout.
+- Fixed a multishipping checkout issue with 3D Secure authentication, affecting versions 3.5.11 and 3.5.12.
+
 ## 3.5.12
 
 - Added support for 3-decimal point currencies (BHD, JOD, KWD, OMR, TND).
