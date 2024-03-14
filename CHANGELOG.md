@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.5.15
+
+- Improvements with automatic webhooks configuration when upgrading from older versions of the module.
+- Replaced statement_descriptor with statement_descriptor_suffix, which is required with Stripe accounts created after February 2024.
+- Improvements around cached payment intent invalidation - certain cases would incorrectly invalidate the PI causing a 3DS error "The provided PaymentMethod was previously used with a PaymentIntent without Customer attachment".
+- After the order is placed at the checkout, the loading spinner will remain active until the redirect to the success page finishes.
+
 ## 3.5.13
 
 - Updated the REST API headless commerce example for PaymentElement to correctly retrieve the PaymentIntent client_secret when customer authentication is required.
