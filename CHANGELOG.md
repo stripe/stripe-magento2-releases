@@ -1,10 +1,16 @@
 # Changelog
 
+## 3.5.16
+
+- Guest orders placed with a wallet would show the customer name as "Guest" in the admin order view page. They will now show the full customer name.
+- When saving payment methods was disabled, subscription customers would not able to add a new payment method for their subscription.
+- Fixed an issue where if two payment intents were associated with a single order, one succeeded, and one was canceled, the successful order could end up canceled.
+
 ## 3.5.15
 
 - Improvements with automatic webhooks configuration when upgrading from older versions of the module.
 - Replaced statement_descriptor with statement_descriptor_suffix, which is required with Stripe accounts created after February 2024.
-- Improvements around cached payment intent invalidation - certain cases would incorrectly invalidate the PI causing a 3DS error "The provided PaymentMethod was previously used with a PaymentIntent without Customer attachment".
+- Fixed cached payment intent invalidation - in cases where a Payment Method Configuration was active and a 3DS card was used, the PI would be incorrectly invalidated causing a 3DS error "The provided PaymentMethod was previously used with a PaymentIntent without Customer attachment".
 - After the order is placed at the checkout, the loading spinner will remain active until the redirect to the success page finishes.
 
 ## 3.5.13
@@ -39,7 +45,6 @@
 ## 3.5.9
 
 - Various 3D Secure customer authentication improvements around the "Order" payment action mode. Reduced likelyhood of a card being declined when the order is invoiced at a future date.
-- Guest orders placed with a wallet would show the customer name as "Guest" in the admin order view page. They will now show the full customer name.
 - Fixed an admin area error where if an order was placed with the Link payment method, and the authorization expired, then invoicing the order would fail with the error 'The provided PaymentMethod cannot be attached. To reuse a PaymentMethod, you must attach it to a Customer first.'
 - Fixed a payment method display issue at the front-end order view page.
 - Fixed a dynamic subscription taxes issue in the invoice.upcoming observer.
