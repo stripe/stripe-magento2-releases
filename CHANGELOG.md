@@ -1,10 +1,31 @@
 # Changelog
 
+## 4.0.0-beta-2
+
+- This is a code quality release with broad refactoring to better comply with Adobe Commerce coding standards. We recommend that merchants carefully review and update all module customizations before upgrading to this version.
+- Added support for the Express Checkout Element. The ECE can display multiple wallet buttons (Google Pay, Apple Pay, Link) at the same time in the order that maximises payment conversion on your page. Various PaymentRequest APIs have been deprecated or replaced by the ECE. We recommend that merchants review and update headless commerce implementations which depend on the deprecated PRAPIs.
+- ACH Direct Debit accounts which require microdeposit verifications, can now be used to purchase subscriptions with future start dates, or be added as saved payment methods from the customer account section. They can also be used in the multi-shipping checkout flow.
+- When a customer adds a saved payment method from their account, or from the multishipping checkout flow, it will become eligible for MIT SCA exemptions and can be reused by the merchant to create admin orders on behalf of the customer.
+- The accordion payment form layout is now the default configuration, and will display all available payment methods instead of the top 5.
+- API endpoints `getModuleConfiguration` (GraphQL API) and `get_module_configuration` (REST API), have been renamed to `getStripeConfiguration` and `get_stripe_configuration`.
+- API calls to `getStripeConfiguration` and `get_stripe_configuration` will additionally return initialization options for the Elements object, which include any configured "Payment Method Configuration" IDs, used to filter the available payment methods at the front-end.
+- The API parameter `manual_authentication` has been removed from both the GraphQL and REST API. It is advised that manual authentication is configured via the module's `etc/config.xml` file.
+- The API parameter `cc_stripejs_token` has been deprecated and removed from both the GraphQL and REST API. The `payment_method` parameter should be used to pass the payment method token to the API.
+- The `payment_element` parameter has been deprecated and removed from both the GraphQL and REST API. Payment method tokens that were created with the CardElement will now be treated the same was as tokens created with the PaymentElement.
+- All examples under the module's `examples/` directory have been updated to use the new API parameters format.
+- Added fallback capability to asynchronously place orders via webhook events when checkout errors prevent the order from being placed.
+
+## 3.5.16
+
+- Guest orders placed with a wallet would show the customer name as "Guest" in the admin order view page. They will now show the full customer name.
+- When saving payment methods was disabled, subscription customers would not able to add a new payment method for their subscription.
+- Fixed an issue where if two payment intents were associated with a single order, one succeeded, and one was canceled, the successful order could end up canceled.
+
 ## 3.5.15
 
 - Improvements with automatic webhooks configuration when upgrading from older versions of the module.
 - Replaced statement_descriptor with statement_descriptor_suffix, which is required with Stripe accounts created after February 2024.
-- Improvements around cached payment intent invalidation - certain cases would incorrectly invalidate the PI causing a 3DS error "The provided PaymentMethod was previously used with a PaymentIntent without Customer attachment".
+- Fixed cached payment intent invalidation - in cases where a Payment Method Configuration was active and a 3DS card was used, the PI would be incorrectly invalidated causing a 3DS error "The provided PaymentMethod was previously used with a PaymentIntent without Customer attachment".
 - After the order is placed at the checkout, the loading spinner will remain active until the redirect to the success page finishes.
 
 ## 3.5.13
@@ -39,7 +60,6 @@
 ## 3.5.9
 
 - Various 3D Secure customer authentication improvements around the "Order" payment action mode. Reduced likelyhood of a card being declined when the order is invoiced at a future date.
-- Guest orders placed with a wallet would show the customer name as "Guest" in the admin order view page. They will now show the full customer name.
 - Fixed an admin area error where if an order was placed with the Link payment method, and the authorization expired, then invoicing the order would fail with the error 'The provided PaymentMethod cannot be attached. To reuse a PaymentMethod, you must attach it to a Customer first.'
 - Fixed a payment method display issue at the front-end order view page.
 - Fixed a dynamic subscription taxes issue in the invoice.upcoming observer.
