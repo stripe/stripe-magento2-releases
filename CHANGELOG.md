@@ -1,6 +1,14 @@
 # Changelog
 
-## 4.0.0-beta-2
+## 4.0.1
+
+- Upgraded to Stripe PHP library v13.15.0.
+- Amazon Pay now supports the "Authorize Only" payment action.
+- Improvements around the redirect-flow (Stripe Checkout) on session email updates and order invalidation.
+- Fixed a case where deleting a product that was ordered and the order is still pending payment, could cause delayed webhook events to fail processing for that order.
+- Fixed an issue with subscription start dates, where if the current date matches the subscription start date, the order cannot be placed.
+
+## 4.0.0
 
 - This is a code quality release with broad refactoring to better comply with Adobe Commerce coding standards. We recommend that merchants carefully review and update all module customizations before upgrading to this version.
 - Added support for the Express Checkout Element. The ECE can display multiple wallet buttons (Google Pay, Apple Pay, Link) at the same time in the order that maximises payment conversion on your page. Various PaymentRequest APIs have been deprecated or replaced by the ECE. We recommend that merchants review and update headless commerce implementations which depend on the deprecated PRAPIs.
