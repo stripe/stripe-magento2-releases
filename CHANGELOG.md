@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.0.2
+
+- Added new admin configuration options to enable or disable Express Checkout Element wallets individually.
+- In certain flows where the payment method would be automatically saved, there were no displayed terms that the payment method would be saved or used for future purchases.
+- When the "Save payment method" setting is disabled, customers will no longer see any saved payment methods at the checkout page.
+- If the customer returned from a redirect-based payment method back to Magento, and switched to a 3D Secure card, the payment method would not be updated after the subsequent order placement.
+- Fixed several backwards compatibility problems with PHP 7.4.
+- Fixed a Stripe object caching issue causing duplicate webhooks configuration when running the CLI webhooks:configure command.
+- Fixed an ACH Direct Debit subscription setup error when the subscription has a start date and the first payment is on the order date.
+
 ## 4.0.1
 
 - Upgraded to Stripe PHP library v13.15.0.
