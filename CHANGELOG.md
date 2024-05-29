@@ -1,11 +1,16 @@
 # Changelog
 
+## 4.0.4 - 2024-05-29
+
+- Added MobilePay icons and MobilePay support for Authorize Only mode.
+- Fixed unhandled multi-shipping checkout scenario with redirect payment methods such as PayPal.
+- Fixed invoice pdf printing from the admin area. HTML tags were visible under the payment info section (affects 4.0.0 - 4.0.3).
+
 ## 4.0.3 - 2024-05-15
 
 - In Adobe Commerce, when a gift card is redeemed, store credit is used, or reward points are applied to the cart, then redirect-based payment methods are automatically hidden at the checkout. Solves quote restoration issues when customers return from the payment provider without a payment authorization.
 - Added support for Multibanco voucher-based payment method in Portugal (beta). Please contact support to enable it in your Stripe account.
 - Voucher-based payment methods such as Multibanco and OXXO will now send the order email when the order is placed, rather than when the payment is completed.
-- Fixed invoice pdf printing from the admin area. HTML tags were visible under the payment info section (affects 4.0.0 - 4.0.2).
 
 ## 4.0.2 - 2024-04-29
 
