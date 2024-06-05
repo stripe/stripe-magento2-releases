@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.0.5 - 2024-06-05
+
+- The payment method icon and name was not appearing in certain pages and emails (affects 4.0.4).
+- Compatibility improvements of Express Checkout with reward points, gift cards, store credit.
+- Express Checkout was appearing on the shopping cart page's minicart whereas it should appear on its sidebar.
+- Improvements with the webhooks order recovery system.
+- Two fixes with subscription reactivations.
+- Removed payment location metadata from payment intents.
+
 ## 4.0.4 - 2024-05-29
 
 - Added MobilePay icons and MobilePay support for Authorize Only mode.
