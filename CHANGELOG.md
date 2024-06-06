@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.6 - 2024-06-06
+
+- Fixed a webhook signature verification error affecting merchants that have multiple Stripe accounts configured (affects 4.0.0 - 4.0.5).
+- Fixed an infinite loop problem when switching from one store view to another. The error would be logged as 'Front controller reached 100 router match iterations'.
+
 ## 4.0.5 - 2024-06-05
 
 - The payment method icon and name was not appearing in certain pages and emails (affects 4.0.4).
