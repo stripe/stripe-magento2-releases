@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.7 - 2024-06-10
+
+- Fixed a problem where if an Express Checkout payment failed, and the customer switched to the PaymentElement, the payment would succeed but a checkout error would prevent the order from being saved (affects 4.0.3 - 4.0.6).
+
 ## 4.0.6 - 2024-06-06
 
 - Fixed a webhook signature verification error affecting merchants that have multiple Stripe accounts configured (affects 4.0.0 - 4.0.5).
