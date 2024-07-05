@@ -1,8 +1,19 @@
 # Changelog
 
+## 4.0.8 - 2024-07-05
+
+- In 4 scenarios where saved payment methods are disabled but the PM needs to be saved, the customer would not see the saved PM dropdown at the checkout (affects 4.0.2 - 4.0.7). All 4 cases will now display the dropdown.
+- Added safety checks so that payment method deduplication is skipped when there are pending orders placed with the duplicate payment method.
+- Improved error handling when there are no available payment element methods for the given cart amount.
+- Added new validations during order placements to handle checkout crashes.
+- Fixed an issue with the order recovery system in "Authorize Only" mode.
+- Fixed a WeChat error on mobile devices.
+- Added new Stripe domains in CSP whitelist.
+- Cosmetic improvements in the admin area.
+
 ## 4.0.7 - 2024-06-10
 
-- Fixed a problem where if an Express Checkout payment failed, and the customer switched to the PaymentElement, the payment would succeed but a checkout error would prevent the order from being saved (affects 4.0.3 - 4.0.6).
+- Fixed a problem where if an Express Checkout payment failed, and the customer switched to the PaymentElement, the payment would succeed but a checkout error would prevent the order from being saved (affects 4.0.0 - 4.0.6).
 
 ## 4.0.6 - 2024-06-06
 
