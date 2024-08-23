@@ -1,8 +1,17 @@
 # Changelog
 
+## 4.0.9 - 2024-08-20
+
+- PayPal can now be saved as a payment method similar to cards.
+- Enabled partial refunds for the Bank Transfers payment method.
+- Fixed order search filters at the sales orders grid. You can search for orders using queries such as "mastercard", "google pay", "klarna" etc.
+- Fixed a bug with Express Checkout Element where if the shipping rate is changed, the total would not update in the payment modal.
+- Fixed two issues with 'Payment Action = Order' mode, affecting redirect-based payment methods, where the payment method would fail to be saved.
+- Fixed a 3D Secure issue with coupon usage increments.
+
 ## 4.0.8 - 2024-07-05
 
-- In 4 scenarios where saved payment methods are disabled but the PM needs to be saved, the customer would not see the saved PM dropdown at the checkout (affects 4.0.2 - 4.0.7). All 4 cases will now display the dropdown.
+- In four scenarios where saved payment methods are disabled but the PM needs to be saved, the customer would not see the saved PM dropdown at the checkout (affects 4.0.2 - 4.0.7). All four cases will now display the dropdown.
 - Added safety checks so that payment method deduplication is skipped when there are pending orders placed with the duplicate payment method.
 - Improved error handling when there are no available payment element methods for the given cart amount.
 - Added new validations during order placements to handle checkout crashes.
