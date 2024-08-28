@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.10 - 2024-08-28
+
+- Fixed a product loading error happening in certain edge cases.
+- Fixed a CSP policy issue in the admin area.
+- Fixed a setup:upgrade issue happening when other modules set the area code.
+
 ## 4.0.9 - 2024-08-20
 
 - PayPal can now be saved as a payment method similar to cards.
