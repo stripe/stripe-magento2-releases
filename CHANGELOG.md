@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.11 - 2024-09-05
+
+- Fixed the "Save payment method" checkbox in the admin new order page.
+- Fixed a javascript crash in the admin new order page.
+
 ## 4.0.10 - 2024-08-28
 
 - Fixed a product loading error happening in certain edge cases.
