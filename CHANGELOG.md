@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.1.0 - 2024-09-10
+
+- Added support for Stripe Tax.
+- Orders for subscriptions with trial periods, start dates, as well as subscription upgrades/downgrades, will be placed with a grand total of 0 to reflect that no payment has been collected. Recurring subscription orders will be placed with a grand total reflecting the collected payment.
+- To better support Stripe Tax, prorated subscription upgrades/downgrades have been temporarily disabled. Only regular subscription upgrades/downgrades are currently supported.
+
 ## 4.0.11 - 2024-09-05
 
 - Fixed the "Save payment method" checkbox in the admin new order page.
