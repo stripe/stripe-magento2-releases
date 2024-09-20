@@ -1,5 +1,18 @@
 # Changelog
 
+## 4.1.1 - 2024-09-20
+
+- Various fixes and improvements with Stripe Checkout (redirect-based payment flow).
+- Added a new configuration option in etc/config.xml to control if coupon usages are incremented before or after the order is placed.
+- Fixed a tax inclusive issue where Klarna and Google Pay would display the tax exclusive amount instead of the tax inclusive one at the checkout page.
+- Fixed error 'The requested qty is not available' affecting bundle products with a Qty of 1, when using Express Checkout.
+- Fixed a case where if a subscription payment failed, and the subscription payment method was updated, a recurring order would not be created for the newly collected payment.
+- Fixed an issue where reactivating a canceled subscription after payment failure, would enter a trial period instead of collecting a new payment.
+- Fixed an issue where printing PDF shipment documents for Stripe Checkout would add escaped html under the payment info section of the shipping document.
+- When migrating a subscription using the CLI command stripe:subscriptions:migrate-subscription-price, the newly generated order will no longer reserve order item inventory.
+- Fixed an issue with wallets not appearing in the shopping cart page when certain plugin interceptiors are implemented.
+- Fixed several cases where Web API errors that should be displayed at the front-end would be masked in production mode.
+
 ## 4.1.0 - 2024-09-10
 
 - Added support for Stripe Tax.
