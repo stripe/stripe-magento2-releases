@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.1.2 - 2024-09-25
+
+- Subscriptions can now be purchased with 100% discount coupons/rules.
+- Fixed a checkout error with Hyva Checkout.
+- Fixed Link not being disabled on product pages when its disabled from the admin.
+- Fixed an obscured error message at the My Payment Methods section.
+- Payment method validation improvements.
+
 ## 4.1.1 - 2024-09-20
 
 - Various fixes and improvements with Stripe Checkout (redirect-based payment flow).
