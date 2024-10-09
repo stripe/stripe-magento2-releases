@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.1.3 - 2024-10-10
+
+- Express Checkout is now supported on bundle product pages.
+- Added MB WAY payment method icons.
+- Moved API examples directory under resources/, added new resources/docs/ directory with current version documentation.
+- Stricter validations when invoicing admin orders.
+- Fixed an issue where after a redirect-based method payment failure, the order would be canceled but not disassociated from the payment intent.
+- Fixed a subscriptions issue where the shipping method would be unavailable if a minimum amount is specified for that method's availability.
+
 ## 4.1.2 - 2024-09-25
 
 - Subscriptions can now be purchased with 100% discount coupons/rules.
