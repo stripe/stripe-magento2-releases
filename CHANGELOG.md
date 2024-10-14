@@ -1,6 +1,11 @@
 # Changelog
 
-## 4.1.3 - 2024-10-10
+## 4.1.4 - 2024-10-14
+
+- Fixed issue with subscription start dates where if bought on the exact start date, the order's grand total would be zero instead of fully paid.
+- Added html escaping to various templates.
+
+## 4.1.3 - 2024-10-09
 
 - Express Checkout is now supported on bundle product pages.
 - Added MB WAY payment method icons.
