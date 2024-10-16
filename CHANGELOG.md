@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.1.5 - 2024-10-16
+
+- Added `resources/cookbooks/` directory with 5 examples of common module customizations.
+- Added various new validations for actions in the My Subscriptions section.
+- Fixed two issues with subscription initial fee taxes.
+- Fixed an issue where in certain checkout flows, the shipping rate of a placed order would be different than the one selected at the checkout.
+- Some CSS fixes with Express Checkout on bundle product pages.
+
 ## 4.1.4 - 2024-10-14
 
 - Fixed issue with subscription start dates where if bought on the exact start date, the order's grand total would be zero instead of fully paid.
