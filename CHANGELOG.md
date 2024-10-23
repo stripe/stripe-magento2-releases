@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.1.6 - 2024-10-22
+
+- Subscription initial fees are now compatible with the Stripe Tax submodule.
+- Fixed an issue causing some webhook events to not be found across any of the configured Stripe accounts.
+- In Adobe Commerce, if store credit, gift cards or reward points were used, Link would appear even if it was disabled.
+- Improvements with subscription recurring order creation logic.
+
 ## 4.1.5 - 2024-10-16
 
 - Added `resources/cookbooks/` directory with 5 examples of common module customizations.
