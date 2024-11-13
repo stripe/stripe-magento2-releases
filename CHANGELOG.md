@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.1.7 - 2024-11-13
+
+- Fixed an recurring subscription orders failing to be created if the subscription had customizable options.
+- Fixed an internal server error when the charge.refunded webhook event was processed for refunds triggered from the Stripe dashboard.
+
 ## 4.1.6 - 2024-10-22
 
 - Subscription initial fees are now compatible with the Stripe Tax submodule.
