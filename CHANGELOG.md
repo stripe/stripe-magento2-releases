@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.2.0 - 2024-11-13
+
+- Express Checkout now supports PayPal and Amazon Pay at product pages, minicart, shopping cart and checkout section.
+- Express Checkout wallet buttons will appear expanded by default. A new configuration setting has been added that can be used to revert to the old collapsed format if needed.
+- The "Payment Method Configuration" setting has been split into two, one that applies to all carts, and one that only applies to virtual carts. Can be used to filter out payment methods for gift carts and other virtual items.
+- Trial subscriptions and subscriptions with start dates will display additional subscription information at the order view page and sales emails.
+- Added support for overcapture, multicapture and external payment methods. Added 3 new cookbooks under `resources/cookbooks/` explaining how to enable these.
+- Various improvements with Stripe Checkout (redirect flow). Incomplete payment intents will no longer appear in the Stripe dashboard.
+- Upgraded to Stripe API version 2024-09-30.acacia.
+
 ## 4.1.7 - 2024-11-13
 
 - Fixed an recurring subscription orders failing to be created if the subscription had customizable options.
