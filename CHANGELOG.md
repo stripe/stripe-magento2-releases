@@ -1,8 +1,20 @@
 # Changelog
 
-## 4.2.0 - 2024-11-13
+## 4.2.1 - 2024-12-04
 
-- Express Checkout now supports PayPal and Amazon Pay at product pages, minicart, shopping cart and checkout section.
+- Upgraded Stripe Tax submodule to v1.0.2.
+- Added Amazon Pay icons to admin area and sales emails.
+- Various improvements with Korean payment methods.
+- Payment method deduplication is skipped if the payment method is used with an active subscription.
+- Added cookbook on how to disable Express Checkout shipping methods.
+- Improvements to the fallback system that asynchronously places orders via webhook events.
+- Added more order comments when orders are canceled.
+- When saving payment methods were disabled, customers would not be able to change a subscription's payment method.
+- Fixed an issue with the admin "Invoice via Stripe Billing" payment method where form validation errors could corrupt the final invoice amount.
+
+## 4.2.0 - 2024-11-14
+
+- Express Checkout now supports Amazon Pay at product pages, minicart, shopping cart and checkout section.
 - Express Checkout wallet buttons will appear expanded by default. A new configuration setting has been added that can be used to revert to the old collapsed format if needed.
 - The "Payment Method Configuration" setting has been split into two, one that applies to all carts, and one that only applies to virtual carts. Can be used to filter out payment methods for gift carts and other virtual items.
 - Trial subscriptions and subscriptions with start dates will display additional subscription information at the order view page and sales emails.
@@ -12,7 +24,7 @@
 
 ## 4.1.7 - 2024-11-13
 
-- Fixed an recurring subscription orders failing to be created if the subscription had customizable options.
+- Fixed recurring subscription orders failing to be created if the subscription had customizable options.
 - Fixed an internal server error when the charge.refunded webhook event was processed for refunds triggered from the Stripe dashboard.
 
 ## 4.1.6 - 2024-10-22
@@ -84,7 +96,6 @@
 
 ## 4.0.9 - 2024-08-20
 
-- PayPal can now be saved as a payment method similar to cards.
 - Enabled partial refunds for the Bank Transfers payment method.
 - Fixed order search filters at the sales orders grid. You can search for orders using queries such as "mastercard", "google pay", "klarna" etc.
 - Fixed a bug with Express Checkout Element where if the shipping rate is changed, the total would not update in the payment modal.
@@ -123,7 +134,7 @@
 ## 4.0.4 - 2024-05-29
 
 - Added MobilePay icons and MobilePay support for Authorize Only mode.
-- Fixed unhandled multi-shipping checkout scenario with redirect payment methods such as PayPal.
+- Fixed unhandled multi-shipping checkout scenario with redirect payment methods.
 - Fixed invoice pdf printing from the admin area. HTML tags were visible under the payment info section (affects 4.0.0 - 4.0.3).
 
 ## 4.0.3 - 2024-05-15
@@ -201,7 +212,7 @@
 
 ## 3.5.10 - 2024-02-14
 
-- PayPal and Amazon Pay now support the "Authorize Only" payment action.
+- Amazon Pay now supports the "Authorize Only" payment action.
 - Fixed an issue causing orders placed from the admin area with the Stripe Billing payment method to be stuck in Pending Payment. Affects versions 3.5.7 to 3.5.9.
 - When the 'Order' payment action is enabled, purchasing subscriptions with the Wallet Button would not set up the subscription correctly.
 - Fixed an issue with Link where if the 'Save payment method' is enabled, orders placed with Link would fail.
@@ -690,7 +701,7 @@
 
 ## 2.6.0 - 2021-07-20
 
-- `MAJOR`: Added support for PayPal
+- Added support for new payment methods.
 
 ## 2.5.9 - 2021-06-10
 
