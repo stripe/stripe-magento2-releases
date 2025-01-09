@@ -1,5 +1,18 @@
 # Changelog
 
+## 4.3.0 - 2025-01-08
+
+- Link is now explicitly disabled in the admin area CardElement.
+- When a cart contains a gift card, the virtual payment method configuration will be used.
+- Compatibility improvements between wallets and OneStepCheckout (OSC) modules when processing the region ID from the modal to the server side.
+- Controller endpoint `GET /stripe/customer/subscriptions/cancel` has changed to `POST /stripe/subscriptions/cancel`.
+- Controller endpoint `GET /stripe/customer/subscriptions/reactivate` has changed to `POST /stripe/subscriptions/reactivate`.
+- Controller endpoint `GET /stripe/customer/subscriptions/edit` has changed to `POST /stripe/subscriptions/change`.
+- Controller endpoint `GET /stripe/customer/subscriptions/changeshipping` has changed to `POST /stripe/subscriptions/changeshipping`.
+- Controller endpoint `GET /stripe/customer/subscriptions/changecard` has changed to `POST /stripe/subscriptions/changepaymentmethod`.
+- Removed deprecated controller endpoint `GET /stripe/customer/paymentmethods/delete`.
+- Added CSRF validations to controller endpoints.
+
 ## 4.2.1 - 2024-12-04
 
 - Upgraded Stripe Tax submodule to v1.0.2.
