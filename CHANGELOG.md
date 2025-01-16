@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.3.1 - 2025-01-15
+
+- Implemented a new exception handler which notifies the store admin email when a payment is collected but a checkout crash prevents the order from being saved.
+- Fixed two issues that could cause orders to be canceled or closed while the payment is still being processed, or has succeeded asynchronously.
+- Fixed an issue when refunding orders that include subscriptions with initial fees.
+
 ## 4.3.0 - 2025-01-08
 
 - Link is now explicitly disabled in the admin area CardElement.
