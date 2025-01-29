@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.3.2 - 2025-01-29
+
+- The "Initial Fee Tax" total was appearing on orders which have no subscriptions.
+- Configurable subscription products could not be purchased with 100% discount coupons.
+- Stripe Checkout sales emails were missing the payment method icon and name (affects 4.2.0 - 4.3.1).
+- Improvements to the webhooks order recovery system.
+
 ## 4.3.1 - 2025-01-15
 
 - Implemented a new exception handler which notifies the store admin email when a payment is collected but a checkout crash prevents the order from being saved.
