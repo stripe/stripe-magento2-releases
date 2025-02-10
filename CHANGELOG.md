@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.3.3 - 2025-02-07
+
+- When more than 10 shipping methods were enabled, Express Checkout would fail to load. These are now filtered to a maximum of 10.
+- When the 'Save payment method' setting was enabled, alternative payment methods which cannot be saved were not available in the redirect flow (Stripe Checkout). These can now be used regardless of the setting.
+- In cases where a payment is collected but the charge.succeeded webhook event fails to arrive, orders placed with the redirect flow (Stripe Checkout) will no longer be canceled/closed by Magento's cron.
+- Certain redirect based methods such as Alipay and Revolut Pay, were sending the sales order email before the payment succeeded.
+- Added icons for Revolut Pay in the admin area and emails.
+- Fixed an issue where canceled subscriptions whose old payment method was deleted, could not be reactivated (affects 4.3.0 - 4.3.2).
+- Fixed an incomplete billing address error when Express Checkout was used from the cart page.
+- One fix and several checkout flow improvements when upgrading or downgrading subscriptions.
+
 ## 4.3.2 - 2025-01-29
 
 - The "Initial Fee Tax" total was appearing on orders which have no subscriptions.
