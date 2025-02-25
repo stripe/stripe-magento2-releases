@@ -1,8 +1,17 @@
 # Changelog
 
+## 4.3.4 - 2025-02-17
+
+- When more than 9 shipping methods were enabled, Express Checkout would fail to load. These are now filtered to a maximum of 9.
+- Fixed an error when placing a subscription order from the admin area.
+- Disabled CVC check for saved cards when placing an order from the admin area.
+- Improvements in the subscriptions reactivation flow.
+- Added handling logic for several scenarios that would fail if a subscription product is deleted from the admin area.
+- Added more information in checkout error emails.
+- Fixed an address error at the product pages for an Express Checkout wallet that does not provide the billing address.
+
 ## 4.3.3 - 2025-02-07
 
-- When more than 10 shipping methods were enabled, Express Checkout would fail to load. These are now filtered to a maximum of 10.
 - When the 'Save payment method' setting was enabled, alternative payment methods which cannot be saved were not available in the redirect flow (Stripe Checkout). These can now be used regardless of the setting.
 - In cases where a payment is collected but the charge.succeeded webhook event fails to arrive, orders placed with the redirect flow (Stripe Checkout) will no longer be canceled/closed by Magento's cron.
 - Certain redirect based methods such as Alipay and Revolut Pay, were sending the sales order email before the payment succeeded.
