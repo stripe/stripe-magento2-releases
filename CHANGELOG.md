@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.3.5 - 2025-03-11
+
+- Trial subscriptions and subscriptions with start dates could not be purchased using the redirect payment flow (Stripe Checkout).
+- Updated WeChat Pay icons in the admin and emails.
+- QR code based payment methods were sending the order email before the payment succeeded. This will now be sent after the payment succeeds.
+- Fixed an issue causing delayed processing of certain queued webhook events.
+- Fixed a bug with downloadable products affecting Magento versions 2.4.7 and newer.
+
 ## 4.3.4 - 2025-02-17
 
 - When more than 9 shipping methods were enabled, Express Checkout would fail to load. These are now filtered to a maximum of 9.
