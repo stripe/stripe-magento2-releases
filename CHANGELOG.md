@@ -1,5 +1,18 @@
 # Changelog
 
+## 4.4.0 - 2025-03-12
+
+- Upgraded Stripe Tax submodule to 1.1.0, which now supports customer group tax exemptions.
+- Added support for Adobe Commerce gift cards, store credit and reward points when purchasing subscriptions.
+- Bank transfers have been added in the admin area as a new payment method.
+- Bank transfers are now supported in all EU countries.
+- Stripe Billing invoices will now be broken down into line items, tax rates, prices, discounts etc. The Magento invoice number now matches the Stripe invoice number.
+- Simplified checkout sidebar totals when a subscription with trial period or start date is purchased.
+- Improved support for Revolut Pay and Alma.
+- Added new cookbook on customizing webhook events.
+- Stripe API upgraded to 2024-10-28.acacia.
+- REST API endpoint `/stripe/payments/get_trialing_subscriptions` has been renamed to `/stripe/payments/get_future_subscriptions`. It will now include subscriptions with start dates.
+
 ## 4.3.5 - 2025-03-11
 
 - Trial subscriptions and subscriptions with start dates could not be purchased using the redirect payment flow (Stripe Checkout).
