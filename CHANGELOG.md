@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.4.1 - 2025-03-24
+
+- When an order placed with ACH requires microdeposit verifications, the cart will be deactivated after the redirect, the sales email will be sent immediately, and a link to the verification page will be included in the email.
+- Orders placed with certain payment methods, were not cancelable while in Pending Payment status, causing reserved inventory issues.
+- Fixed an issue where if both a subscription's tax percent and price change, the invoice.upcoming event would update both the price and tax. It will now only update the tax.
+- Fixed a template localization bug with bank transfers in the admin area, causing a crash when placing the order.
+- Fixed a bug where subscriptions with start dates that are configured to also collect a payment on the order date, would not create an order on the start date (subsequent billing cycles unaffected).
+- Fixed incorrect Stripe Checkout session amount when buying mixed products and subscriptions with trial periods or start dates.
+- Cleaned unused code from the codebase.
+
 ## 4.4.0 - 2025-03-12
 
 - Upgraded Stripe Tax submodule to 1.1.0, which now supports customer group tax exemptions.
