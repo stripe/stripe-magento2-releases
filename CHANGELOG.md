@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.4.2 - 2025-04-11
+
+- Compatibility with Magento 2.4.8 and PHP 8.4.
+- Critical security fix.
+- The SOFORT payment method has been deprecated.
+- The My payment methods link was not displaying with some module configurations.
+- When charge.succeeded webhook event is processed, the customer cart is deactivated. The customer no longer needs to return to the website.
+- When customers place orders with wallets such as Google Pay, and the shipping address name is different than the billing address name, the name on the order's shipping address was incorrect.
+- Fixed an admin error "No such PaymentMethod" when placing an admin order with multiple configured Stripe accounts.
+
 ## 4.4.1 - 2025-03-24
 
 - When an order placed with ACH requires microdeposit verifications, the cart will be deactivated after the redirect, the sales email will be sent immediately, and a link to the verification page will be included in the email.
