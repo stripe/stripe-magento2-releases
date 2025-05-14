@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.4.3 - 2025-05-12
+
+- Klarna can be configured from the admin as an Express Checkout wallet.
+- The Satispay payment method supports Authorize Only mode.
+- Added support for extended authorizations, for both the embedded and redirect based flows. Can be enabled from etc/config.xml.
+- Added setting in etc/config.xml to disable missing order emails.
+- Added admin and email icons for ScalaPay, Satispay and Affirm.
+- Fixed an issue where a missing order email would be sent unnecessarily.
+- Fixed a PDF printing issue for invoices and shipment documents in the admin area.
+- Fixed an issue where coupons that can only be applied once, could not be used with the redirect payment flow (Stripe Checkout).
+- Fixed an order cancelation issue with the redirect payment flow.
+
 ## 4.4.2 - 2025-04-11
 
 - Compatibility with Magento 2.4.8 and PHP 8.4.
