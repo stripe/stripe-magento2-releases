@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.4.4 - 2025-05-28
+
+- Made several block templates easier to overwrite.
+- The place order button would intermittently be re-enabled while the order was still being placed.
+- Discount coupon usage increment logic now also applies to Express Checkout.
+
 ## 4.4.3 - 2025-05-12
 
 - Klarna can be configured from the admin as an Express Checkout wallet.
