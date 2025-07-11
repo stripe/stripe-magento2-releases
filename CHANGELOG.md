@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.4.5 - 2025-07-11
+
+- The Stripe Radar risk score and the payment method type are now set immediately when the order is placed, rather than when the charge.succeeded event is processed.
+- The Billie payment method now supports Authorize Only mode.
+- Added admin and email icons for the TWINT and Billie payment methods.
+- If the phone number format at the checkout is invalid, some payment methods like MB Way will now prompt the customer to re-enter the phone number.
+- Express Checkout wallet buttons were not visible at the product pages with Luma theme and some narrow screen widths.
+- In Magento 2.4.8, customers who bought a subscription were not able to update it's shipping details from the My Subscriptions page.
+- When using the "Order" payment action, placed orders could not be edited after the setup_intent.succeeded event was processed.
+- Fixed a Bank Transfers error for Spanish customers.
+
 ## 4.4.4 - 2025-05-28
 
 - Made several block templates easier to overwrite.
