@@ -66,6 +66,10 @@ Fill the project details and click save:
 
    ![I/O Management API](img/management-api.png)
 
+1. Repeat the same steps, and add the **Adobe Commerce as a Cloud Service** to the environment.
+
+   ![Adobe Commerce as a Cloud Service API](img/accs-api.png)
+
 #### Set up your local environment
 
 Before you can deploy the app to App Builder, you will additionally need to install **Node.js** and the **Adobe I/O CLI** package.
@@ -84,6 +88,10 @@ To install the Stripe app, follow the steps below:
 1. Extract the downloaded code to a local directory, and use the CLI to run the following commands:
 
    ```sh
+   # Navigate to the extracted project directory
+   cd path/to/extracted/stripe-app
+
+   # Login and configure Adobe CLI (run from the project root directory)
    aio login -f
    aio console org select
    aio console project select
@@ -91,33 +99,30 @@ To install the Stripe app, follow the steps below:
    aio app use --merge
    ```
 
-1. Confirm that the `.env` and `.aio` files were added to the project directory. Inside `.env`, you will find your OAuth credentials, which are needed for the app to communicate with the Adobe Commerce Admin API:
+1. Confirm that the `.env` and `.aio` files were added to the project directory, and run the following command:
 
-   ```env
-   AIO_ims_contexts_aio__123456789_client__id=
-   AIO_ims_contexts_aio__123456789_client__secrets=
-   AIO_ims_contexts_aio__123456789_technical__account__email=
-   AIO_ims_contexts_aio__123456789_technical__account__id=
-   AIO_ims_contexts_aio__123456789_scopes=
-   AIO_ims_contexts_aio__123456789_ims__org__id=
+   ```bash
+   # Run from the Stripe app project root directory
+   npm run sync-oauth-credentials
    ```
 
-   Copy the values of these fields into the following newly added fields:
+   This will generate entries in the `.env` file:
 
    ```env
    OAUTH_CLIENT_ID=
-   OAUTH_CLIENT_SECRETS=
+   OAUTH_CLIENT_SECRETS=[""]
    OAUTH_TECHNICAL_ACCOUNT_ID=
    OAUTH_TECHNICAL_ACCOUNT_EMAIL=
+   OAUTH_SCOPES=[""]
    OAUTH_IMS_ORG_ID=
-   OAUTH_SCOPES=
    ```
 
-   The above statically named values will be read by the app's runtime actions, in order to create access tokens for the Adobe Commerce Admin API.
+   The above values will be read by the deployed app's runtime actions, in order to create access tokens for the Adobe Commerce Admin API.
 
 1. Generate and add encryption keys for sensitive credentials by running the following command:
 
    ```sh
+   # Run from the Stripe app project root directory
    npm run generate-encryption-key
    ```
 
@@ -131,12 +136,14 @@ To install the Stripe app, follow the steps below:
 1. Install app dependencies:
 
    ```sh
+   # Run from the Stripe app project root directory
    npm install
    ```
 
 1. Deploy the updated app:
 
    ```sh
+   # Run from the Stripe app project root directory
    aio app deploy
    ```
 
@@ -167,19 +174,19 @@ The following settings are available for configuration
 
 - **Enable**: Will enable or disable the payment method at your storefront.
 - **Publishable and Private Key**: These are the Stripe account API keys which will be used to collect payments. You can find these at [https://dashboard.stripe.com/apikeys](https://dashboard.stripe.com/apikeys)
-- **Adobe Commerce URL**: This is the REST API endpoint of your Adobe Commerce as a Cloud Service instance. You can get this by navigating to your [Commerce instances](https://experience.adobe.com/#/commerce/cloud-service/instances), and clicking the information icon (i) next to to the Commerce instance you want to connect to. A modal will appear listing the **REST endpont**.
+- **Adobe Commerce URL**: This is the REST API endpoint of your Adobe Commerce as a Cloud Service instance. You can get this by navigating to your [Commerce instances](https://experience.adobe.com/#/commerce/cloud-service/instances), and clicking the information icon (i) next to to the Commerce instance you want to connect to. A modal will appear listing the **REST endpoint**.
 - **Debug**: If you will be building your EDS storefront, Debug mode may return additional error details on various API calls to the app's runtime.
 
 ## Events Configuration
 
-With the app configured, the next step is to subscribe to events emited by your Adobe Commerce as a Cloud Service instance.
+With the app configured, the next step is to subscribe to events emitted by your Adobe Commerce as a Cloud Service instance.
 This will allow the app to update payments in your Stripe dashboard with order details, and automatically invoice orders that have been paid.
 
 1. At the top right of the environment page, click **Download all**.
 
    ![Download workspace metadata](img/download-all.png)
 
-   The downloaded file includes metadata in json format about the app. Open the file in a text editor and copy it's contents.
+   The downloaded file includes metadata in json format about the app. Open the file in a text editor and copy its contents.
 
 1. Navigate to your Adobe Commerce admin under **Stores > Settings > Configuration > Adobe Services > Adobe I/O Events > General configuration**.
 
@@ -223,9 +230,7 @@ This will allow the app to update payments in your Stripe dashboard with order d
 
 ## Add Stripe to your EDS storefront
 
-You can add the Stripe payment method at the checkout page of your EDS storefront by utilizing a pre-build EDS block,
+You can add the Stripe payment method at the checkout page of your EDS storefront by utilizing a pre-built EDS block,
 which includes all functionality needed to render the payment form, collect the payment and place the order.
 
-You can find this EDS block inside the source code of the downloaded code, that you downloaded from the marketplace
-while installing the app. The EDS block is located under `blocks/stripe-payment/`, and instructions on how to
-integrate it with your EDS storefront can be found inside `blocks/stripe-payment/README.md`.
+You can find this EDS block at [https://github.com/stripe/stripe-magento2-releases/tree/master/app-builder/blocks/stripe-payment](https://github.com/stripe/stripe-magento2-releases/tree/master/app-builder/blocks/stripe-payment). Instructions on how to integrate it with your EDS storefront can be found inside the [README.md](https://github.com/stripe/stripe-magento2-releases/tree/master/app-builder/blocks/stripe-payment/README.md) file at the same location.
