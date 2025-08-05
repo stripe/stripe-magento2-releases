@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.4.6 - 2025-08-04
+
+- Added html and js escaping in all phtml templates.
+- Fixed a multishipping CSP issue, preventing the payment form from initializing.
+- Added minicart invalidation when returning from external payment authorization pages.
+
 ## 4.4.5 - 2025-07-11
 
 - The Stripe Radar risk score and the payment method type are now set immediately when the order is placed, rather than when the charge.succeeded event is processed.
