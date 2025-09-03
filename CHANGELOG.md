@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.4.7 - 2025-09-02
+
+- Made it easier to customize initialization config of Express Checkout
+- An unhandled scenario with 3DS wallet payments would place the order in Payment Review status instead of Pending Payment status, with no ability to cancel the order.
+- Increased the Express Checkout Element's container minimum width from 240px to 248px. Required after internal ECE updates, otherwise ECE may not display on product pages.
+- Two fixes with 3DS payments when wallets are used from the product page and manual authentication is disabled.
+- In some cases when paying with a wallet via Express Checkout, the customer name and phone on the shipping address was incorrect.
+- When canceling an uncaptured payment that was under review, the Magento order would not be unholded.
+- Minor UI improvements in the admin area.
+
 ## 4.4.6 - 2025-08-04
 
 - Added html and js escaping in all phtml templates.
