@@ -1,11 +1,16 @@
 # Changelog
 
+## 4.4.8 - 2025-09-11
+
+- Various fixes with 3DS payments when wallets are used and manual authentication is disabled. (#MAGENTO-922)
+- Deprecated setting "increment_coupon_usage_after_order_placed" from config.xml which caused discount coupon usage issues with some users. (#MAGENTO-923)
+- When an order was placed with Stripe Checkout (redirect flow), and the charge.succeeded webhook failed to be delivered, the Payment Information block in Magento would display the payment as Pending, while it has succeeded. (#MAGENTO-924)
+
 ## 4.4.7 - 2025-09-02
 
 - Made it easier to customize initialization config of Express Checkout
 - An unhandled scenario with 3DS wallet payments would place the order in Payment Review status instead of Pending Payment status, with no ability to cancel the order.
 - Increased the Express Checkout Element's container minimum width from 240px to 248px. Required after internal ECE updates, otherwise ECE may not display on product pages.
-- Two fixes with 3DS payments when wallets are used from the product page and manual authentication is disabled.
 - In some cases when paying with a wallet via Express Checkout, the customer name and phone on the shipping address was incorrect.
 - When canceling an uncaptured payment that was under review, the Magento order would not be unholded.
 - Minor UI improvements in the admin area.
