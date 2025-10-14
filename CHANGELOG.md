@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.4.9 - 2025-10-13
+
+- Fixed an order cancelation when a mixed trial subscription cart is purchased with Stripe Checkout and a redirect PM like Revolut (#MAGENTO-940)
+- Manually inoicing a multishipping order would attempt a capture for an amount larger than the invoice amount (#MAGENTO-938)
+- Subscriptions with start dates and trials could not be bought with coupon codes (#MAGENTO-937, #MAGENTO-943)
+- Orders placed with Stripe Billing from the admin area, were sending an order email that did not include the link to the invoice. (#MAGENTO-947)
+
 ## 4.4.8 - 2025-09-11
 
 - Various fixes with 3DS payments when wallets are used and manual authentication is disabled. (#MAGENTO-922)
