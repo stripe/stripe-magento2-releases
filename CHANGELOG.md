@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.5.0 - 2025-10-15
+
+- Added support for the Payment Method Messaging Element. Improve conversions by displaying brands of available Buy Now Pay Later (BNPL) payment methods on the product pages, minicart and shopping cart page.
+- Added support for payment disputes. Opened and closed disputes will be automatically reflected in order commens, status and available order actions.
+- Enhancements for Stripe Radar. You can now approve or reject payments flagged as fraudulent directly from the Magento admin panel.
+- Added support for Meses sin intereses. Customers in Mexico can now buy and pay in installments.
+- Added new advanced configuration section, from where IC+ features can be enabled (overcapture, multicapture, extended authorizations etc), or other advanced module configuration can be changed.
+- Added support for Payment Intent Line Items, offering cost savings and improved authentication rates by providing Level 2 (L2) and Level 3 (L3) / Product 3 data to the card networks.
+- Recurring subscription orders no longer send order emails when they renew.
+
+Breaking changes:
+
+- Upgraded Stripe API to 2025-08-27.basil, or 2025-08-27.preview when enabling preview features.
+- Upgraded Stripe PHP SDK to version 17.6.
+- Subscription coupons which were configured to renew forever, will no longer be created as Stripe objects. The subscription price will instead factor them in.
+
 ## 4.4.9 - 2025-10-13
 
 - Fixed an order cancelation when a mixed trial subscription cart is purchased with Stripe Checkout and a redirect PM like Revolut (#MAGENTO-940)
