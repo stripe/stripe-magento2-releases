@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.5.1 - 2025-10-21
+
+- Added icons for the Wero payment method.
+- When an order was placed with limited-use discount coupons, the usage would not be reverted if the order was later canceled. (#MAGENTO-954)
+- When the Payment Method Messaging Element was enabled, the product pages could not be cached.
+- When payment intent line items was enabled (v4.5.0), a strict type arguments bug would cause a checkout crash.
+
 ## 4.5.0 - 2025-10-15
 
 - Added support for the Payment Method Messaging Element. Improve conversions by displaying brands of available Buy Now Pay Later (BNPL) payment methods on the product pages, minicart and shopping cart page.
