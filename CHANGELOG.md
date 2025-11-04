@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.5.3 - 2025-11-03
+
+- When using Express Checkout from the product page, taxes would not be displayed if the cart only contained virtual items. (#MAGENTO-963)
+- When Express Checkout was used to place an order, the shipping address name was not set correctly on the order. Instead the billing address name was used. (#MAGENTO-962)
+
 ## 4.5.2 - 2025-10-22
 
 - Recurring subscription orders were not displaying the payment method icon in the orders grid page. (#MAGENTO-946)
