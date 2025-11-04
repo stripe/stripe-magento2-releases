@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.5.2 - 2025-10-22
+
+- Recurring subscription orders were not displaying the payment method icon in the orders grid page. (#MAGENTO-946)
+- Stripe no longer supports Belgium VBANs. Removed all BE related logic and configuration from the Bank Transfers payment method.
+
 ## 4.5.1 - 2025-10-21
 
 - Added icons for the Wero payment method.
