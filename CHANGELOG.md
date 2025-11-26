@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.5.4 - 2025-11-20
+
+- Express Checkout wallets can now be enabled simultaneously at two checkout page locations, both at the top section and inside the payment form.
+- Added new icons for Stablecoins, Zip, Pix, Sofort, ACH Direct Debit, Cash App Pay, BLIK and PromptPay.
+- Fixed an invalid email address format error preventing Express Checkout orders from being placed.
+- When the "Save payment methods" setting was disabled, but there was a subscription in the cart, logged in customers could still see saved payment methods at the checkout page. (#MAGENTO-978)
+- The "Save card on customer" checkbox in the admin will remember its value if the order placement fails with a decline, or when the payment section is refreshed after shipping method changes.
+- When the "Save card on customer" checkbox in the admin was checked, and the "Save payment methods" setting was enabled, the order placement was failing with error "You cannot confirm with off_session=true when setup_future_usage is also set". (#MAGENTO-977)
+- When the "Save payment methods" setting was disabled, saved payment methods were not available/displayed in the admin during new order placements.
+- When a new order was created from the admin area for a new customer (via the "Create new customer" button), the payment method would not be saved against that customer. (#MAGENTO-976)
+
 ## 4.5.3 - 2025-11-03
 
 - When using Express Checkout from the product page, taxes would not be displayed if the cart only contained virtual items. (#MAGENTO-963)
