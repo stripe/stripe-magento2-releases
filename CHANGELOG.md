@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.5.5 - 2025-12-11
+
+- Fixed a setup:upgrade crash affecting new installations of v4.5.4 on PHP 8.1+. (MAGENTO-1000)
+- When an authentication modal is closed while the payment is not completed (i.e. CashApp) then the customer wont be redirected to the success page. (MAGENTO-981)
+- Added icons for PayPay.
+
 ## 4.5.4 - 2025-11-20
 
 - Express Checkout wallets can now be enabled simultaneously at two checkout page locations, both at the top section and inside the payment form.
