@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.5.6 - 2026-01-15
+
+- Express Checkout wallets now remember previously selected shipping rates and preselect them when a new modal opens.
+- When a customer updates the shipping address of an existing subscription, their shipping address will now also be updated in Stripe.
+- Performance optimizations when subscriptions are disabled, about 100ms saved.
+- In custom storefronts, if the shipping method ID was not passed to ece_shipping_rate_changed, the tax was not recalculated.
+- Fixed an issue where closed disputes for non-card payment methods would not reset the order status from Disputed to its original status.
+- Fixed an admin crash when invoicing an order with Level 3 data / payment line items.
+- Fixed a circular dependency between classes.
+
 ## 4.5.5 - 2025-12-11
 
 - Fixed a setup:upgrade crash affecting new installations of v4.5.4 on PHP 8.1+. (MAGENTO-1000)
