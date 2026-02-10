@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.5.7 - 2026-02-09
+
+- When Admin > Stores > Configuration > Catalog > Inventory > Product Stock Options > Automatically Return Credit Memo Item to Stock is enabled, refunds triggered from the Stripe dashboard will also return stock items to stock and reset reservations.
+- Stripe Checkout sessions that expired were displaying as Pending on the order page until the checkout.session.expired event was processed.
+- Recurring subscription orders no longer recheck saved card CVC codes.
+- Fixed an issue with Express Checkout where under some conditions, changes to the shipping address or shipping rates would not trigger a tax totals recalculation, with the ECE modal displaying the incorrect payment amount.
+- Fixed an issue where updating a subscription while manual terms and conditions were enabled would cause an order placement failure.
+- Fixed an issue that was causing duplicate inventory reservations for virtual products.
+
 ## 4.5.6 - 2026-01-15
 
 - Express Checkout wallets now remember previously selected shipping rates and preselect them when a new modal opens.
