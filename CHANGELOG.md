@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.5.8 - 2026-03-12
+
+- The "Send missing order emails" setting is now global, rather than store scope specific.
+- Some redirect-based payment methods under My Payment Methods page were not deduplicated if the customer added them twice.
+- Fixed a case where Level 3 data would not be reset after a payment failure followed by changes in the cart.
+- Fixed an edge case where an order marked for manual review would not revert to its original state after the payment is approved.
+- Fixed an issue where expired authorizations would not be re-authorized after expiration.
+- When a payment method configuration was enabled, orders placed via Express Checkout with payment methods missing from the PMC would cause a checkout error.
+- When charge.succeeded and checkout.session.completed webhooks were processed in parallel, a race condition could cause payment additional information to be overwritten.
+
 ## 4.5.7 - 2026-02-09
 
 - When Admin > Stores > Configuration > Catalog > Inventory > Product Stock Options > Automatically Return Credit Memo Item to Stock is enabled, refunds triggered from the Stripe dashboard will also return stock items to stock and reset reservations.
