@@ -1,5 +1,18 @@
 # Changelog
 
+## 4.5.9 - 2026-04-20
+
+- Compatibility fixes with Magento 2.4.9-beta1.
+- Added support for dual dispute cases.
+- Amazon Pay can now be saved as a payment method.
+- Guest checkouts correctly pass the guest email to PaymentElement initialization parameters.
+- Removed a redundant API call during order placement, improving performance.
+- The redirect flow (Stripe Checkout) was incorrectly saving payment methods in cases where it shouldn't, affects 4.4.3 - 4.5.8.
+- Fixed a multicurrency refunds issue where rounding would cause an incorrect amount to be refunded.
+- Fixed an edge case where an order placement could fail, after the payment was collected.
+- Link is disabled in Adobe Commerce when store credit, reward points or gift cards are used, as redirect based PMs could fail reverting customer credit when the payment is abandonned.
+- Dead code cleanup and other minor improvements.
+
 ## 4.5.8 - 2026-03-12
 
 - The "Send missing order emails" setting is now global, rather than store scope specific.
