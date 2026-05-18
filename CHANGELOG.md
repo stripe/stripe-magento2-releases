@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.5.10 - 2026-05-18
+
+- In Magento 2.4.9, a conflict with a core module was causing a crash at the checkout page.
+- Improvements around saving, displaying and deduplicating payment methods.
+- Clearer messaging in the admin when an order is placed with an external payment method.
+
 ## 4.5.9 - 2026-04-20
 
 - Compatibility fixes with Magento 2.4.9-beta1.
