@@ -1,5 +1,41 @@
 # Changelog
 
+## 4.6.0 - 2026-05-27
+
+- Adaptive Pricing support for the redirect flow (Stripe Checkout): when enabled, Stripe automatically presents prices in the customer's local currency and settles in the merchant's account currency. The admin order view shows the amount the customer was charged, and an order comment is added when the presentment currency differs from the session currency.
+- Payment method collection now uses confirmation tokens across all checkout flows, providing support for 40+ payment methods and stronger 3D Secure handling.
+- Saved payment methods are displayed inside the Payment Element and can be updated or deleted in-place.
+- Explicit customer consent for saving payment methods. New three-value setting: Disabled / Ask for customer consent / Save without asking.
+- Asynchronous refunds support for ACH Direct Debit, SEPA Direct Debit and other async payment methods. Credit memos start in an Open state and are finalized by the `refund.updated` webhook.
+- Strict CSP mode is now fully supported across all checkout flows.
+- Customers can add a new payment method from the My Subscriptions page and assign it to a subscription in one step.
+- Trialing and future start date subscriptions can have their shipping address, quantities and product options edited before the subscription starts.
+- Configurable email notifications for subscription renewals and changes, with custom template support.
+- CVC recollection for saved cards now works on the multishipping checkout.
+- Configurable Pending Payment Order Lifetime for Bank Transfers and Stripe Invoicing (admin "Invoice via Stripe Billing").
+- Stripe Invoicing now has its own configuration section with an Enabled toggle.
+- Replaced Card Element with Payment Element in the admin area.
+- Scalapay support for Authorize Only mode.
+- Improved payment form error messages at the multishipping checkout.
+- Performance: Payment Method Messaging Element JavaScript is not loaded when the feature is disabled.
+- Redirect-based payment methods (iDEAL, Klarna, Bancontact, Alipay, WeChat Pay, etc.) no longer create a Pending invoice at order placement. The invoice is now created in PAID state when the `charge.succeeded` webhook arrives. Pending Payment orders can also be cancelled directly from the admin while waiting for the customer to complete authentication.
+- New REST endpoints: `GET /V1/stripe/payments/get_stripe_ece_configuration`, `POST /V1/stripe/payments/change_subscription_payment_method`.
+- New GraphQL mutations: `changeSubscriptionPaymentMethod`, `getECEParams`, `addToCart`, `eceShippingAddressChanged`, `eceShippingRateChanged`, `ecePlaceOrder`, `restoreQuote`, `updateCart`, `placeMultishippingOrder`, `finalizeMultishippingOrder`.
+- New GraphQL queries: `getStripeECEConfiguration`, `getRequiresAction`, `getFutureSubscriptions`, `getCheckoutPaymentMethods`, `getCheckoutSessionId`, `getUpcomingInvoice`, `getInstallmentPlans`.
+- `StripePaymentsInput.confirmation_token` added to GraphQL schema.
+- Removed unused `$quoteId` parameter from `POST /V1/stripe/payments/place_multishipping_order`, `POST /V1/stripe/payments/finalize_multishipping_order` and `POST /V1/stripe/payments/update_cart`.
+- Support for PHP 8.5.
+- Stripe PHP SDK upgraded to v20.1.
+- Stripe API upgraded to `2026-05-27.dahlia` and Stripe.js to the `dahlia` channel.
+- Breaking: billing address phone number is now required for all payments.
+- Breaking: `StripePaymentsInput.cvc_token` is ignored; migrate to confirmation tokens.
+- Breaking: `save_payment_method` setting changed from boolean to three-value select (0/1/2); stores upgrading from value 1 will now show a consent checkbox — set to 2 to preserve previous silent-save behaviour.
+- Breaking: `ModuleConfiguration.appInfo` GraphQL type changed from `[String]` to `AppInfo` object.
+- Breaking: standalone CVC Element must be removed from custom front-end implementations; the Payment Element collects CVC for saved cards directly.
+- Breaking: deprecated and removed the unused `cancel_last_order` REST API endpoint.
+
+Merchants with custom storefronts or module customizations are advised to review backwards incompatible changes in more detail at https://docs.stripe.com/use-stripe-apps/adobe-commerce/payments/install#version-history.
+
 ## 4.5.10 - 2026-05-18
 
 - In Magento 2.4.9, a conflict with a core module was causing a crash at the checkout page.
