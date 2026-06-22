@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.6.1 - 2026-06-15
+
+- Express Checkout Element fixes, wallets would not appear in certain cases.
+- The "Seller name" field for ECE was not passed correctly to wallets that support it.
+- The "Save payment method for future purchases" checkbox from Link was appearing on the My Payment Methods and My Subscriptions pages, now removed.
+- Display the payment logo in admin orders grid for multishipping orders. (#MAGENTO-1140)
+- When trying to refund a negative amount for invoices, an error will be thrown.
+
 ## 4.6.0 - 2026-05-27
 
 - Adaptive Pricing support for the redirect flow (Stripe Checkout): when enabled, Stripe automatically presents prices in the customer's local currency and settles in the merchant's account currency. The admin order view shows the amount the customer was charged, and an order comment is added when the presentment currency differs from the session currency.
