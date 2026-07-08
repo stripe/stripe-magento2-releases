@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.6.2 - 2026-07-08
+
+- After a payment failure, if the customer unchecked the "Save payment method" checkbox and retried order placement, a setupFutureUsage error would prevent the order placement.
+- Stronger customer authentication requirements in version 4.6 were causing decreased checkout conversions, now relaxed similar to versions 4.5 and older.
+- When saving a payment method during order placement, the payment_method.attached webhook dependency is removed; saved PMs now synchronously become available for reuse.
+- The horizontal tabs configuration option was not taking effect on dhalia channel.
+- Added field validations in the admin area under the product subscription configuration form.
+- When the Multibanco modal was closed, the customer was not redirected to the success page.
+- Fixed an email incomplete error at the multi-shipping checkout flow.
+- Added safety mechanism to protect against webhook processing race conditions.
+- Improved validations around subscription updates.
+
 ## 4.6.1 - 2026-06-15
 
 - Express Checkout Element fixes, wallets would not appear in certain cases.
