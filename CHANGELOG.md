@@ -1,9 +1,22 @@
 # Changelog
 
+## 4.6.5 - 2026-08-06
+
+- When the payment element is initially rendered, the first available payment method will be automatically expanded.
+- When Express Checkout was disabled within the payment form, Link was not disabled in PaymentElement.
+- When using Authorize Only mode in multi-shipping mode, invoiced orders will be automatically captured via cron right before the payment intent expires.
+- Added admin and email icons for the PIX payment method and support for saving it against the customer.
+- Added admin and email icons for the Sunbit payment method and support for Authorize Only mode.
+- Added new validations around limited coupon usage with the redirect flow (Stripe Checkout).
+- For the admin Stripe Invoicing payment method, a new setting is added 'Send invoice emails' which can be used to disable emails sent by Stripe to customers. When disabled, only the order email will be sent.
+- Fixed a bug that was causing a PHP memory exhaustion error during checkouts with redirect-based payment methods. Affected stores with very large numbers of placed orders.
+- When a payment authorization expired, the order would be canceled, preventing re-authorization attempts (affects versions 4.6). The order now remains open and can be invoiced to re-authorize.
+- Fixed a race condition where charge.succeeded could overwrite order email flags (send_email/email_sent) set by Magento during checkout.
+- Stripe API upgraded to 2026-06-24.dahlia.
+
 ## 4.6.4 - 2026-07-22
 
 - When a Payment Method Configuration is active, but no payment methods are available, the Stripe payment method at the checkout is automatically deactivated (was previously showing a No payment methods error).
-- When a payment authorization expired, the order would be canceled, preventing re-authorization attempts (affects versions 4.6). The order now remains open and can be invoiced to re-authorize.
 - When Express Checkout was disabled, assets were loading at the catalog pages. Now removed for performance.
 - Fixed an invalid phone number error when using certain payment methods like MB Way or Bizum.
 - Fixed a subscription fields validation error when saving a product in the admin area.
