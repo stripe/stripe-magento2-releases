@@ -1,5 +1,18 @@
 # Changelog
 
+## 4.6.6 - 2026-09-03
+
+- Improved handling of Chinese, Japanese and Korean names coming from wallets (reversed firstname/lastname).
+- Disputes were not correctly reflected on the Magento order if a partial credit memo existed. Comments will now be added about the dispute.
+- Fixed an issue with the refunds.updated webhook event, which could cause credit memos to be stuck in Pending status.
+- The Satispay payment method can now be saved.
+- Added cart clearing mechanism when merging guest and logged in carts during the subscription update flow.
+- Hardening of webhook signature verifications.
+- Fixed a case where the customer's payment method would be saved even if they did not explicitly agree to saving it.
+- After canceling a subscription, customers were not able to delete the associated payment method.
+- Fixed a bug where using both store credit and "Payment Method Configurations" would cause an order placement error.
+- Improved guards and admin notifications for checkout crashes of trial subscriptions or subscriptions with future start dates.
+
 ## 4.6.5 - 2026-08-06
 
 - When the payment element is initially rendered, the first available payment method will be automatically expanded.
