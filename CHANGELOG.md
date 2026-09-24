@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.6.7 - 2026-09-22
+
+- Fixed a checkout crash when using store credit on Adobe Commerce.
+- Added safeguards against reopening orders that were canceled and superseeded by newer ones after customer cart changes.
+- After an asynchronous refund succeeded, a credit memo would be updated to Refunded, but the credit memo grid still displayed Open. Fixed the grid status.
+- Fixed a multishipping issue where abandoning a payment and retrying with a different payment method could duplicate the placed orders.
+- Fixed an issue where if an offline payment method like Multibanco is left unpaid, cron would eventually invoice that order instead of canceling it.
+- Fixed a PHP warning triggering for Express Checkout wallets that do not supply billing details.
+
 ## 4.6.6 - 2026-09-03
 
 - Improved handling of Chinese, Japanese and Korean names coming from wallets (reversed firstname/lastname).
