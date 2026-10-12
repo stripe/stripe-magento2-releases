@@ -1,5 +1,31 @@
 # Changelog
 
+## 4.7.1 - 2026-10-07
+
+- Bank transfer orders placed from the admin area now show the correct amount due. The transaction is marked as pending before the invoice is created, instead of appearing as fully invoiced while the transfer is still awaiting payment.
+- When a bank transfer is canceled from the Stripe Dashboard, the Magento order is now canceled as well, instead of remaining in Pending Payment. Canceling a bank transfer order also validates the payment intent and returns a clear error if it cannot be canceled.
+- The Place Order button at the legacy embedded checkout is now enabled only after the Payment Element has finished rendering, preventing orders from being placed before a payment method is available.
+- Fixed the admin area Stripe configuration page failing to load when the Stripe API key is expired or invalid; a warning is now displayed instead.
+- Removed UGX from the list of zero-decimal currencies. Stripe requires UGX amounts to have two trailing zeros for backwards compatibility, so amounts are now sent with the correct value.
+- Fixed the logger not being injected into the multishipping checkout type, which could cause errors during order creation.
+
+## 4.7.0 - 2026-09-28
+
+- Added new checkout flow: Elements with Checkout Sessions (EwCS). The Payment Element is initialized from a Stripe Checkout Session to take advantage of new features unavailable to the legacy approach. The EwCS flow is enabled when the "Adaptive Pricing" setting is enabled (Stripe > Payments); it is disabled by default, in which case the legacy embedded flow is used.
+- Adaptive Pricing now also works on the embedded flow: when enabled and the payment action is Authorize & Capture, the checkout shows an in-page currency selector that lets customers opt to pay in their local currency. The redirect flow behavior is unchanged.
+- Under the My Payment Methods page, success and error messages now appear above the payment element. If they are out of view, they are scrolled into view.
+- The Stripe payment method at the multi-shipping checkout page is now automatically selected and expanded.
+- Automatic detection of MOTO (mail order / telephone order) is now Stripe-account aware in multi-store-view configurations.
+- Failed webhook events are now retried every 15 minutes (previously hourly) and give up after 6 failed attempts.
+- New REST endpoint: `POST /V1/stripe/payments/checkout_session_data`, returning the client secret and session ID for the EwCS flow.
+- New GraphQL query: `getCheckoutSessionData`, the GraphQL equivalent of the REST `checkout_session_data` endpoint.
+- Redirect-based payment methods are now supported when store credit, gift cards, or reward points are applied to the cart. Previously the Payment Element was limited to card-only payments.
+- Delayed notification payment methods now display a notice and a link to complete the payment on the order success page, and send a pending payment email: ACH Direct Debit microdeposit verification, and voucher methods such as Boleto, OXXO, Konbini and Multibanco.
+- Breaking: when the "Adaptive Pricing" setting is enabled, the embedded storefront payment flow uses Elements with Checkout Sessions. Custom storefronts targeting the legacy embedded renderer should keep Adaptive Pricing disabled.
+- Breaking: under the new EwCS flow, `au_becs_debit`, `ideal`, `pix` and `satispay` can no longer be saved as reusable payment methods.
+
+Merchants with custom storefronts or module customizations are advised to review backwards incompatible changes in more detail at https://docs.stripe.com/use-stripe-apps/adobe-commerce/payments/install#version-history.
+
 ## 4.6.7 - 2026-09-22
 
 - Fixed a checkout crash when using store credit on Adobe Commerce.
