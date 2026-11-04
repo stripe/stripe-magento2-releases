@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.8.0 - 2026-10-29
+
+- Upgraded the Stripe PHP library to v20.3.
+- 9 stability fixes for guest checkout, saved payment methods, multishipping checkout, Stripe Checkout (redirect flow), partial invoicing, discount coupons and the "Order" payment action.
+
+## 4.7.2 - 2026-10-20
+
+- Add the pending refund functionality for RefundInvoiceInterface to handle the pending refunds, making pending refunds possible through REST API.
+- Check if payment intent or setup intent is canceled before confirming it.
+- During a subscription reactivation process, if a new product is added to the basket, the subscription reactivation process will be stopped and the customer will be returned to the subscriptions page. (MAGENTO-1252)
+- During state changing webhook handling like charge capturing, check the account the webhook is being signed with to the account order that is processed was created on. This is to prevent an order being updated using different Stripe account that the one used to pay it with, which could happen in a multi-account setup. (MAGENTO-1253)
+
 ## 4.7.1 - 2026-10-07
 
 - Bank transfer orders placed from the admin area now show the correct amount due. The transaction is marked as pending before the invoice is created, instead of appearing as fully invoiced while the transfer is still awaiting payment.
