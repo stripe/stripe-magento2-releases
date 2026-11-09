@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.8.1 - 2026-11-09
+
+- Fixed Product Tax (FPT) amounts are now invoiced correctly for orders paid with redirect-based payment methods.
+- Fixed an infinite loading spinner on the billing address form when checking out a virtual-only cart with Elements with Checkout Sessions.
+- Fixed a JavaScript error on the product, cart and minicart pages when the Payment Method Messaging Element loaded before Stripe was initialized.
+- Stability fixes for order placement and order cancellation.
+
 ## 4.8.0 - 2026-10-29
 
 - Upgraded the Stripe PHP library to v20.3.
