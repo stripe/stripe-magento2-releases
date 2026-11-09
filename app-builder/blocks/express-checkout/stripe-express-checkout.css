@@ -1,0 +1,155 @@
+.stripe-express-checkout {
+  color: var(--color-neutral-800);
+  font: var(--type-body-1-default-font);
+  min-height: 44px;
+  position: relative;
+}
+
+.stripe-express-checkout[hidden] {
+  display: none;
+}
+
+.stripe-express-checkout .stripe-express-checkout-heading {
+  color: var(--color-neutral-800);
+  font: var(--type-body-1-strong-font);
+  letter-spacing: var(--type-body-1-strong-letter-spacing);
+  margin: 0 0 var(--spacing-small);
+}
+
+.stripe-express-checkout-loading {
+  min-height: 44px;
+  opacity: 0;
+}
+
+.stripe-express-checkout .stripe-express-checkout-wallets {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: var(--spacing-small);
+  min-width: 0;
+  position: relative;
+}
+
+.stripe-express-checkout .stripe-express-checkout-wallets > .StripeElement {
+  min-width: 0;
+  width: 100%;
+}
+
+.stripe-express-checkout .stripe-express-checkout-link {
+  order: 1;
+}
+
+.stripe-express-checkout .stripe-express-checkout-amazon {
+  order: 2;
+}
+
+.stripe-express-checkout .stripe-express-checkout-apple-pay {
+  order: 3;
+}
+
+.stripe-express-checkout .stripe-express-checkout-google-pay {
+  order: 4;
+}
+
+.stripe-express-checkout .stripe-express-checkout-paypal {
+  order: 5;
+}
+
+.stripe-express-checkout .stripe-express-checkout-klarna {
+  order: 6;
+}
+
+@media (min-width: 600px) {
+  .stripe-express-checkout .stripe-express-checkout-wallets {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  }
+}
+
+.stripe-express-checkout-hidden {
+  display: none;
+}
+
+/* Absorbs the click before it reaches a wallet button inside Stripe's iframe. */
+.stripe-express-checkout .stripe-express-checkout-gate {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  inset: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.stripe-express-checkout .stripe-express-checkout-gate[hidden] {
+  display: none;
+}
+
+.stripe-express-checkout .stripe-express-checkout-status {
+  margin-top: var(--spacing-small);
+}
+
+.stripe-express-checkout .stripe-express-checkout-status:empty {
+  display: none;
+}
+
+.stripe-express-checkout .stripe-express-checkout-separator {
+  align-items: center;
+  color: var(--color-neutral-700);
+  display: flex;
+  font: var(--type-body-2-default-font);
+  gap: var(--spacing-small);
+  letter-spacing: var(--type-body-2-default-letter-spacing);
+  margin-top: var(--spacing-xbig);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.stripe-express-checkout .stripe-express-checkout-separator::before,
+.stripe-express-checkout .stripe-express-checkout-separator::after {
+  background-color: var(--color-neutral-400);
+  content: "";
+  flex: 1;
+  height: var(--shape-border-width-1);
+}
+
+.commerce-checkout.stripe-express-checkout-blocked,
+form.stripe-express-checkout-blocked,
+body.stripe-express-checkout-blocked {
+  position: relative;
+}
+
+.stripe-express-checkout-blocked::before {
+  background: rgb(255 255 255 / 65%);
+  content: "";
+  cursor: progress;
+  inset: 0;
+  pointer-events: all;
+  position: fixed;
+  z-index: 9998;
+}
+
+.stripe-express-checkout-blocked::after {
+  animation: stripe-express-checkout-spin 0.8s linear infinite;
+  border: 3px solid rgb(99 91 255 / 25%);
+  border-radius: 50%;
+  border-top-color: #635bff;
+  content: "";
+  height: 28px;
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  z-index: 9999;
+}
+
+@keyframes stripe-express-checkout-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

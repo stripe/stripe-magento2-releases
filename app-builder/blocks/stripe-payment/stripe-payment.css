@@ -1,10 +1,10 @@
 /* Stripe payment form styles */
-.stripe-elements-loading {
+#stripe-payment-form .stripe-elements-loading {
   position: relative;
   min-height: 200px;
 }
 
-.stripe-elements-loading::before {
+#stripe-payment-form .stripe-elements-loading::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -18,7 +18,7 @@
   animation: spin 1s linear infinite;
 }
 
-.stripe-elements-loading::after {
+#stripe-payment-form .stripe-elements-loading::after {
   content: 'Loading payment form...';
   position: absolute;
   top: 60%;
@@ -33,7 +33,7 @@
   100% { transform: rotate(360deg); }
 }
 
-.stripe-error {
+#stripe-payment-form .stripe-error {
   color: #e53935;
   font-size: 14px;
   text-align: center;
@@ -43,15 +43,16 @@
   border: 1px solid #ffcdd2;
   margin-top: 10px;
   margin-bottom: 10px;
-  animation: fadeIn 0.3s ease-in;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: fade-in 0.3s ease-in;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
 
-@keyframes fadeIn {
+@keyframes fade-in {
   from {
     opacity: 0;
     transform: translateY(-5px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

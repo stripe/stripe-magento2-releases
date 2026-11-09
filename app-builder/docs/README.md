@@ -155,7 +155,7 @@ PaaS deployments can alternatively use Commerce Integration authentication (OAut
 
 #### Obtain a license
 
-You will need a [license for App Builder](https://developer.adobe.com/app-builder/docs/get_started/app_builder_get_started/set-up#access-and-credentials) in order to deploy the app. App Builder is necessary so that you can configure IMS authentication credentials, configure Commerce I/O Events, persist data to Adobe I/O Lib Files, or generate encryption keys for your environment file.
+You will need a [license for App Builder](https://developer.adobe.com/app-builder/docs/get_started/app_builder_get_started/set-up#access-and-credentials) in order to deploy the app. App Builder is necessary so that you can configure IMS authentication credentials, configure Commerce I/O Events, and persist data to Adobe I/O Lib State.
 
 You can sign up to a trial of App Builder via [https://developer.adobe.com/app-builder/trial/](https://developer.adobe.com/app-builder/trial/).
 
@@ -192,9 +192,7 @@ Fill the project details and click save:
 
 ![I/O Management API](img/management-api.png)
 
-1. Add **Admin UI SDK** if it is available in your organization by selecting **Add service** > **API** > **Admin UI SDK**. App Management uses Admin UI SDK compatibility for the Commerce Admin configuration experience.
-
-![Admin UI SDK](img/admin-ui-sdk.png)
+1. Add **Adobe Commerce with Adobe ID** to the environment by selecting **Add service** > **API** > **Adobe Commerce with Adobe ID**. This API is used together with the **OAuth Web App** credential that you add in [Add workspace credentials](#add-workspace-credentials).
 
 Do not create Commerce event registrations manually for a standard App Management installation. App Management creates the Commerce event provider and event registrations automatically when the app is installed.
 
@@ -228,6 +226,7 @@ Use the credentials from your own Adobe Developer Console workspace. Do not reus
 #### Set up your local environment
 
 Before you can deploy the app to App Builder, you will additionally need to install **Node.js** and the **Adobe I/O CLI** package.
+The app supports Node.js `22.23.4` or later within the 22.x line, and Node.js `24.22.1` or later within the 24.x line (`>=22.23.4 <23.0.0 || >=24.22.1 <25.0.0`, as declared in the `engines` field of `package.json`).
 Please follow [the official instructions](https://developer.adobe.com/app-builder/docs/get_started/app_builder_get_started/set-up#local-environment-setup) to set up your local environment.
 
 ## Install the App via Adobe Exchange Marketplace and App Management
@@ -279,33 +278,38 @@ To install the Stripe app, follow the steps below:
 
    These values come from the OAuth Server-to-Server credential in Adobe Developer Console. The deployed app's runtime actions read them to create access tokens for the Adobe Commerce Admin API. For more information, see Adobe's [OAuth Server-to-Server authentication documentation](https://www.adobe.com/go/devs_authentication).
 
-1. Generate and add the Stripe runtime encryption values by running the following command:
+1. Create the App Management configuration encryption key. App Management uses it to encrypt the secret key and webhook signing secret that you save in Adobe Commerce Admin, and the Stripe runtime actions use it to read them. The key is required: without a valid key, saving or reading these secrets fails.
 
-   ```sh
-   # Run from the Stripe app project root directory
-   npm run generate-encryption-key
-   ```
+   1. Generate the key:
 
-   The command outputs the encryption key required by Stripe runtime actions:
+      ```sh
+      # Run from the Stripe app project root directory
+      npx aio-commerce-lib-config encryption setup
+      ```
 
-   ```env
-   ENCRYPTION_KEY=
-   ```
+      The command creates `.env` if it does not exist and adds a randomly generated 256-bit key (64 hexadecimal characters) to it:
 
-   The app generates a unique AES-GCM IV for every secret it encrypts. If you are upgrading from a release that stored secrets with `ENCRYPTION_IV`, copy that old value to `LEGACY_ENCRYPTION_IV` only until the Stripe configuration has been saved again; then remove it.
+      ```env
+      AIO_COMMERCE_CONFIG_ENCRYPTION_KEY=
+      ```
 
-   Generate the App Management configuration encryption key if it is not already present in `.env`:
+      If `.env` already contains a key, the command keeps it and does not generate a new one.
 
-   ```sh
-   # Run from the Stripe app project root directory
-   npx aio-commerce-lib-config encryption setup
-   ```
+   1. Confirm that the key is present and valid:
 
-   Add the generated value to `.env`. App Management uses this key to encrypt configuration saved through Adobe Commerce Admin:
+      ```sh
+      # Run from the Stripe app project root directory
+      npx aio-commerce-lib-config encryption validate
+      ```
 
-   ```env
-   AIO_COMMERCE_CONFIG_ENCRYPTION_KEY=
-   ```
+   1. Copy the key from `.env` to a secure place, such as your team's secret manager. Secrets saved in App Management cannot be decrypted without it.
+
+   Follow these rules for the key:
+
+   - Use one key for each App Builder workspace. If you deploy the same workspace from more than one `.env` file, for example one for SaaS and one for PaaS, every file must contain the same value.
+   - Do not change or remove the key after you have saved the Stripe configuration. A different key cannot decrypt the saved secrets. See [App Management Configuration Fails to Load After an Encryption Key Change](#app-management-configuration-fails-to-load-after-an-encryption-key-change).
+   - Do not commit `.env` to source control.
+   - The deployment passes the key to the app's runtime actions. After you add or change it, deploy again.
 
 1. **Configure deployment type and Commerce instance settings** in your `.env` file:
 
@@ -353,6 +357,8 @@ To install the Stripe app, follow the steps below:
    ```
 
    Do not use `--force-events` unless you intentionally want Adobe I/O Events providers and registrations recreated.
+
+   The deployment passes `AIO_COMMERCE_CONFIG_ENCRYPTION_KEY` from `.env` to the app's runtime actions. Deploy again whenever you add or change that value.
 
 ## Install the App in Adobe Commerce App Management
 
@@ -422,19 +428,44 @@ Configure Stripe from App Management:
 
 ![Stripe configuration in App Management](img/app-management-configure-stripe.png)
 
+The **Secret key** and **Webhook signing secret** are saved encrypted with `AIO_COMMERCE_CONFIG_ENCRYPTION_KEY`, the key you created in [Install the App via Adobe Exchange Marketplace and App Management](#install-the-app-via-adobe-exchange-marketplace-and-app-management). If you change that key later, see [App Management Configuration Fails to Load After an Encryption Key Change](#app-management-configuration-fails-to-load-after-an-encryption-key-change).
+
 The following settings are available for configuration:
 
-- **Enable Stripe**: Enables or disables the payment method at your storefront.
+- **Enable Stripe**: Enables or disables the payment method at your storefront. It can be set per scope, see [Enable or disable Stripe per scope](#enable-or-disable-stripe-per-scope).
 - **Publishable key and Secret key**: Stripe account API keys used to collect payments. You can find them in [Stripe API keys](https://dashboard.stripe.com/apikeys).
 - **Webhook signing secret**: Stored with the App Management configuration for merchant reference. The deployed webhook action currently verifies Stripe signatures with the `STRIPE_WEBHOOK_SECRET` environment value, so set that deployment value to the signing secret from the exact webhook destination.
 - **Adobe Commerce REST base URL**: The REST endpoint for your Commerce instance. For SaaS instances, find it in [Adobe Experience Cloud Commerce instances](https://experience.adobe.com/#/commerce/cloud-service/instances). For PaaS instances, use your Commerce REST base URL.
 - **Debug mode**: Returns additional runtime error details while testing.
 - **Success Page URL**: URL where customers are redirected after successful payment when using redirect-based payment methods (iDEAL, Bancontact, PayPal, etc.). When webhook order placement completes before the browser return, the app appends `orderRef` and `orderNumber`. If order placement is still pending, the app appends `payment_intent` and `payment_status` so the storefront can continue showing a pending or confirmation state.
 - **Failure Page URL**: URL where customers are redirected if payment fails when using redirect-based payment methods. Supports `{error_message}` placeholder. Example: `https://your-store.com/checkout/failure?error={error_message}`
+- **Allowed storefront origins**: Comma-separated list of exact HTTPS storefront origins that may call the checkout endpoints. Leave it empty to use the `ALLOWED_ORIGINS` deployment value. The origins of the Success Page URL and Failure Page URL are always allowed.
 - **Save payment method for future use**: Allows customers to save supported payment methods.
 - **Capture mode**: Choose automatic capture or manual capture. Automatic capture captures payment during checkout. Manual capture authorizes payment during checkout and captures it when the Commerce order is invoiced.
 
-Checkout endpoint CORS is restricted to configured storefront origins. By default, the app derives allowed origins from the configured HTTPS Success Page and Failure Page URLs. Set `ALLOWED_ORIGINS` to a comma-separated list of exact HTTPS storefront origins when the checkout runs on another domain. A browser request from an unlisted origin is intentionally denied; an allowlisted origin receives the underlying application error response for troubleshooting.
+### Enable or disable Stripe per scope
+
+To hide Stripe for one website or store view, open the installed Stripe app in App Management, select that scope with **Change scope**, set **Enable Stripe** to **Disabled**, and save.
+
+App Management installs a Commerce webhook with the app. Each time Commerce lists the payment methods of a cart, the webhook asks the app whether to hide Stripe. The app reads **Enable Stripe** for the store view of the cart and removes the Stripe payment method from the list when it is set to **Disabled**. No further step is needed. The app caches App Management configuration for up to 5 minutes, so a change can take up to 5 minutes to reach checkout.
+
+To apply a change at once, clear the cached configuration. Run the commands from the app root directory that contains `app.config.yaml` and `.env`. The cache is kept separately in each Runtime region, so clear every region:
+
+```bash
+aio app state delete --match "configuration.*" --region amer
+aio app state delete --match "configuration.*" --region emea
+aio app state delete --match "configuration.*" --region apac
+aio app state delete --match "configuration.*" --region aus
+```
+
+This removes only the cached copies. The saved configuration is kept, and the next checkout reads it again.
+
+- Only a value that was saved as **Disabled**, on the store view or on a scope above it, hides Stripe. A scope that never saved the value keeps Stripe available.
+- The store view must exist in the App Management scope tree. If it was created after the scopes were last synced, use **Manage Scopes** to sync them. A store view that is not in the scope tree is never filtered.
+- If the webhook fails or does not answer in time, the list is left unchanged and Stripe stays available.
+- An installation made before this webhook existed must run the App Management installation once more from **System** > **Apps** > **App Management**, so that App Management installs the webhook. Confirm that the webhook `stripe_stripe_payment_method_filter` is listed in Commerce Admin afterwards.
+
+Checkout endpoint CORS is restricted to configured storefront origins. By default, the app derives allowed origins from the configured HTTPS Success Page and Failure Page URLs. Set **Allowed storefront origins** in the Business Configuration, or the `ALLOWED_ORIGINS` deployment value, to a comma-separated list of exact HTTPS storefront origins when the checkout runs on another domain. A value saved in **Allowed storefront origins** replaces the `ALLOWED_ORIGINS` value instead of adding to it, so list every origin there. A browser request from an unlisted origin is intentionally denied; an allowlisted origin receives the underlying application error response for troubleshooting.
 
 ### Redirect Payment Methods
 
@@ -476,7 +507,9 @@ Saved payment methods are scoped to the customer and supported payment method ty
 
 Commerce events allow the app to update Stripe payments when orders, invoices, and credit memos change in Commerce. With App Management, these events are created automatically when the app is installed. The event definitions come from the app's Commerce configuration and are delivered to the private `stripe/events-handler` Runtime Action; do not create a public webhook registration for these events.
 
-During installation, App Management shows the Commerce Events step before the custom installation step. On PaaS, that custom step registers or updates the Stripe OOPE payment method through the available OOPE REST APIs. On SaaS, Commerce App Management owns the payment-method association.
+During installation, App Management shows the Commerce Events step before the custom installation step. On both SaaS and PaaS, that custom step registers or updates the Stripe OOPE payment method (`oope_stripe`) through the Commerce OOPE REST API, with `backend_integration_url` pointing at the deployed `init-params` and `payment-intent` actions.
+
+On PaaS, the installation additionally removes and re-adds the three Stripe Commerce event subscriptions listed below so that they are bound to the Stripe events provider. This step is skipped on SaaS.
 
 On the **Configure event registration** page, select the generated event provider, click **Next**, select the Commerce events to subscribe to, and click **Next** again.
 
@@ -502,6 +535,8 @@ After installation, verify the generated event registration from Commerce Admin:
 Use the **Events** button only to review the generated event registration. For more information, including PaaS manual setup when App Management is not managing the registration, see Adobe's [Adobe I/O Events for Adobe Commerce documentation](https://developer.adobe.com/commerce/extensibility/events/).
 
 ## Validate the installation
+
+Confirm that the encryption key works: open the installed Stripe app in **System** > **Apps** > **App Management**, click **Business Configuration**, save the Stripe settings, and confirm that the page reloads without a **Configuration load error**.
 
 Run a test checkout before enabling live payments:
 
@@ -544,13 +579,80 @@ aio app state delete configuration.global
 
 Do not run `aio app deploy --force-events` for this issue.
 
-### **[PaaS Only]** Stripe Configuration Save Fails with 404 Error
+### Unable to Read App Management Configuration
 
-If saving configuration returns `Failed to update payment methods: [404] Request does not match any route.`, confirm that `magento/module-out-of-process-payment-methods` is installed and enabled.
+Stripe runtime actions fail with an error that starts with `Unable to read App Management config:` when they cannot read the saved configuration. Match the rest of the message:
 
-### **[PaaS Only]** Authorization Error when Saving Stripe Configuration
+- `No saved App Management configuration found`: no Stripe configuration has been saved. Open the installed Stripe app in App Management, enter the Stripe settings, and save. The app does not read configuration saved on the removed legacy Stripe Configuration page.
+- `Encryption key has not been given`: `AIO_COMMERCE_CONFIG_ENCRYPTION_KEY` is not set in the deployed app. Run `npx aio-commerce-lib-config encryption setup` from the Stripe app project root directory, then deploy again.
+- `The given encryption key is not a valid hex string.` or `The given encryption key must be 64 hex characters (32 bytes).`: the key in `.env` is malformed. Run `npx aio-commerce-lib-config encryption validate`, correct the value, and deploy again. If secrets were already saved, restore the original key instead of generating a new one.
+- `Failed to decrypt value`: the deployed key differs from the key that encrypted the saved secrets. See the next section.
 
-If saving configuration returns `The consumer isn't authorized to access Magento_OutOfProcessPaymentMethods::oope_payment_method_create`, update the Commerce integration API permissions for out-of-process payment methods.
+### App Management Configuration Fails to Load After an Encryption Key Change
+
+If the Stripe configuration page shows **Configuration load error**, and the browser also displays a FormatJS message such as `An id must be provided to format a message`, inspect the `app-management/config` runtime activation first. An error similar to the following confirms that the saved password fields cannot be decrypted with the currently deployed `AIO_COMMERCE_CONFIG_ENCRYPTION_KEY`:
+
+```text
+Failed to decrypt value
+Unsupported state or unable to authenticate data
+```
+
+The FormatJS message is a secondary App Management UI error and is not the root cause.
+
+If the previous encryption key is available, restore that key to the same App Builder workspace and redeploy after receiving deployment approval. This preserves the saved secrets. If the previous key is unavailable, clear only the encrypted Stripe fields with the configuration action's `PATCH` endpoint, then enter the secrets again in App Management.
+
+1. In the browser developer tools, open the failing `GET /api/v1/web/app-management/config` request and record its runtime host and `scopeId`. Use the scope UUID from the request; do not use `global` as the scope ID.
+1. Obtain a current Adobe IMS access token and organization ID for the same organization and workspace.
+1. Set the values locally without committing them or placing the token directly in shell history:
+
+   ```bash
+   export APP_RUNTIME_HOST="your-runtime-host.adobeioruntime.net"
+   export APP_SCOPE_ID="00000000-0000-0000-0000-000000000000"
+   export ADOBE_IMS_ORG_ID="YOUR_ORG_ID@AdobeOrg"
+   read -rsp "Adobe IMS access token: " ADOBE_IMS_TOKEN
+   export ADOBE_IMS_TOKEN
+   echo
+   ```
+
+1. Unset only `privateKey` and `webhookSecret`:
+
+   ```bash
+   curl --fail-with-body --request PATCH \
+     "https://${APP_RUNTIME_HOST}/api/v1/web/app-management/config" \
+     --header "Authorization: Bearer ${ADOBE_IMS_TOKEN}" \
+     --header "x-api-key: exc_app" \
+     --header "x-gw-ims-org-id: ${ADOBE_IMS_ORG_ID}" \
+     --header "Content-Type: application/json" \
+     --data "{\"scopeId\":\"${APP_SCOPE_ID}\",\"config\":[{\"name\":\"privateKey\",\"value\":null},{\"name\":\"webhookSecret\",\"value\":null}]}"
+   ```
+
+   A successful request returns HTTP `200` with `Configuration values updated successfully`. Other configuration fields remain unchanged. The removed secret values cannot be recovered without the original encryption key or another secure copy.
+
+1. Verify that the same request used by App Management loads successfully:
+
+   ```bash
+   curl --fail-with-body \
+     "https://${APP_RUNTIME_HOST}/api/v1/web/app-management/config?scopeId=${APP_SCOPE_ID}&commerceEnv=saas" \
+     --header "Authorization: Bearer ${ADOBE_IMS_TOKEN}" \
+     --header "x-api-key: exc_app" \
+     --header "x-gw-ims-org-id: ${ADOBE_IMS_ORG_ID}"
+   ```
+
+1. Refresh App Management, re-enter the Stripe secret key and webhook signing secret for the affected scope, and save. Clear the local token when finished:
+
+   ```bash
+   unset ADOBE_IMS_TOKEN
+   ```
+
+Never paste an IMS access token into documentation, source control, tickets, or chat. Revoke or expire any token that is accidentally exposed.
+
+### **[PaaS Only]** Installation Fails with 404 Error
+
+If the App Management installation fails with `Failed to register Stripe OOPE payment method` and the Commerce message `Request does not match any route.`, confirm that `magento/module-out-of-process-payment-methods` is installed and enabled.
+
+### **[PaaS Only]** Authorization Error during Installation
+
+If the App Management installation fails with `The consumer isn't authorized to access Magento_OutOfProcessPaymentMethods::oope_payment_method_create`, update the Commerce integration API permissions for out-of-process payment methods.
 
 ### **[PaaS Only]** Module Installation Issues
 
@@ -632,6 +734,92 @@ If Commerce events do not process, verify the App Management installation and ge
 
 For PaaS manual setup when App Management is not managing the registration, use Adobe's [Adobe I/O Events for Adobe Commerce documentation](https://developer.adobe.com/commerce/extensibility/events/).
 
+### **[PaaS Only]** Commerce Events Not Firing
+
+If Commerce events do not reach the app on PaaS after order, invoice, or credit memo activity, run these commands from the Adobe Commerce application root directory, where `bin/magento` exists.
+
+Confirm the subscribed events:
+
+```bash
+bin/magento events:list -vv
+bin/magento events:registrations:list -vv
+```
+
+The Stripe app expects these three namespaced events on the Commerce Stripe events provider:
+
+```text
+stripe.observer.sales_order_save_after
+stripe.observer.sales_order_invoice_save_after
+stripe.observer.sales_order_creditmemo_save_after
+```
+
+If any are missing, remove and re-add them. Set `STRIPE_PROVIDER_ID` to the Stripe provider ID shown in Commerce Admin under the installed Stripe app **Events** page, or from `bin/magento events:registrations:list -vv`:
+
+```bash
+bin/magento events:unsubscribe stripe.observer.sales_order_save_after
+bin/magento events:unsubscribe stripe.observer.sales_order_invoice_save_after
+bin/magento events:unsubscribe stripe.observer.sales_order_creditmemo_save_after
+
+bin/magento events:subscribe stripe.observer.sales_order_save_after \
+  --parent observer.sales_order_save_after \
+  --providerId "${STRIPE_PROVIDER_ID}" \
+  --fields=entity_id --fields=increment_id --fields=quote_id \
+  --fields=customer_firstname --fields=customer_lastname --fields=customer_email \
+  --fields=grand_total --fields=status --fields=state \
+  --fields=payment.method --fields=payment.additional_information \
+  --fields=payment.additional_data --force
+
+bin/magento events:subscribe stripe.observer.sales_order_invoice_save_after \
+  --parent observer.sales_order_invoice_save_after \
+  --providerId "${STRIPE_PROVIDER_ID}" \
+  --fields=entity_id --fields=order_id --fields=increment_id \
+  --fields=grand_total --fields=state \
+  --fields=order.entity_id --fields=order.increment_id --fields=order.quote_id \
+  --fields=order.payment.method --fields=order.payment.additional_information \
+  --force
+
+bin/magento events:subscribe stripe.observer.sales_order_creditmemo_save_after \
+  --parent observer.sales_order_creditmemo_save_after \
+  --providerId "${STRIPE_PROVIDER_ID}" \
+  --fields=entity_id --fields=order_id --fields=invoice_id \
+  --fields=increment_id --fields=grand_total --fields=state \
+  --fields=order.entity_id --fields=order.increment_id --fields=order.quote_id \
+  --fields=order.payment.method --fields=order.payment.additional_information \
+  --force
+```
+
+Synchronize event metadata and clear cache:
+
+```bash
+bin/magento events:metadata:populate
+bin/magento cache:flush
+```
+
+You can also click **Execute Synchronization** on **Stores** > **Settings** > **Configuration** > **Adobe Services** > **Adobe I/O Events** > **General configuration**.
+
+Confirm Adobe I/O Events is enabled in that Admin page, and that cron is running. While testing, you can publish queued events immediately:
+
+```bash
+bin/magento cron:run
+# or
+bin/magento queue:consumers:start commerce.eventing.event.publish
+```
+
+On Adobe Commerce on cloud infrastructure, also confirm `.magento.env.yaml` enables eventing:
+
+```yaml
+stage:
+  global:
+    ENABLE_EVENTING: true
+  deploy:
+    CRON_CONSUMERS_RUNNER:
+      cron_run: true
+      max_messages: 0
+      consumers: []
+```
+
+Place or update a new order after these steps. Existing carts or already-processed documents may not emit another useful event.
+
 ### Feature Comparison
 
 | Feature               | SaaS           | PaaS              |
@@ -644,3 +832,70 @@ For PaaS manual setup when App Management is not managing the registration, use 
 | Luma Storefront       | Not Available  | Available         |
 
 For more information about PaaS compatibility, see Adobe's [Extension Compatibility Guide](https://developer.adobe.com/commerce/extensibility/app-development/extension-compatibility/).
+
+## Release Notes
+
+### Version 1.3.0
+
+Version 1.3.0 lets merchants enable or disable Stripe per website or store view from App Management.
+
+#### Enable Stripe per scope
+
+- **Enable Stripe** now applies per scope. Setting it to **Disabled** for a website or store view removes Stripe from the payment methods Commerce returns for carts of that store view. Other store views keep Stripe.
+- App Management installs a Commerce webhook (`payment_method_filter.get_list`) with the app. Commerce calls it each time it lists the payment methods of a cart, and the app answers from the saved **Enable Stripe** value of the cart's store view.
+- Only a value saved as **Disabled** hides Stripe. If the setting cannot be read, or the webhook fails or times out, Stripe stays available.
+- A change can take up to 5 minutes to reach checkout because of the configuration cache. See [Enable or disable Stripe per scope](#enable-or-disable-stripe-per-scope) to apply it at once.
+- Existing installations must run the App Management installation once more so that the webhook is installed.
+- The app version is aligned at 1.3.0 across the App Management configuration, the extension manifest, the package metadata, and the Stripe application info reported to Stripe.
+
+#### Configuration through App Management only
+
+- The legacy **Stripe Configuration** page in the Commerce Admin menu and its separate configuration storage were removed. Stripe is configured only in App Management, and values saved on the legacy page are no longer read.
+- **Allowed storefront origins** is now a Business Configuration field. It replaces the setting that was only available on the legacy page.
+- `AIO_COMMERCE_CONFIG_ENCRYPTION_KEY` is required, because the app has no other configuration source. Create it with `npx aio-commerce-lib-config encryption setup` and keep the same value for the workspace. See [Install the App via Adobe Exchange Marketplace and App Management](#install-the-app-via-adobe-exchange-marketplace-and-app-management).
+- `ENCRYPTION_KEY`, `LEGACY_ENCRYPTION_IV` and the `npm run generate-encryption-key` script are no longer used. You can remove the two values from `.env`.
+- The archived legacy setup scripts and guidance are no longer part of the package.
+
+### Version 1.2.1
+
+Version 1.2.1 is a maintenance and reliability release for version 1.1.0. It corrects the Stripe payment method registration on Adobe Commerce as a Cloud Service, makes refund and PaymentIntent handling idempotent, repairs Commerce event bindings on PaaS, and aligns the supported Node.js versions and dependencies.
+
+#### Payment method registration
+
+- The App Management installation step now registers or updates the Stripe out-of-process payment method (`oope_stripe`) on both SaaS and PaaS. Previously this step was skipped on SaaS, so the payment method could be missing from the available payment methods returned for a cart.
+- The `backend_integration_url` returned by Commerce GraphQL (`oope_payment_method_config.backend_integration_url`) points at the deployed `init-params` and `payment-intent` actions.
+- Existing SaaS installations that do not return `oope_stripe` should update or reinstall the app from **System** > **Apps** > **App Management** so that the installation step runs again.
+
+#### Refunds
+
+- Before creating a refund, the app checks Stripe for an existing refund tagged with the Commerce credit memo ID and skips creation when one already exists.
+- Refund creation is skipped when the payment is already fully refunded in Stripe, for example when the refund was initiated from the Stripe Dashboard.
+- Every refund request carries an idempotency key derived from the credit memo ID, which prevents duplicate refunds when Stripe or Commerce deliver the same event more than once.
+- Credit memo events that do not include an `entity_id` are rejected with a `400` response.
+
+#### Order and PaymentIntent handling
+
+- Repeated Commerce order-save events (for example after an invoice or credit memo) no longer update a PaymentIntent that already has the order metadata attached.
+- The PaymentIntent for an order is resolved from the `client_secret` stored on the order payment first. The quote lookup is used only when the PaymentIntent was never confirmed or the `client_secret` is unavailable. This prevents mismatches when quote or order IDs are reused across Commerce databases.
+- PaymentIntents in the `succeeded`, `requires_capture`, and `processing` statuses are treated as confirmed.
+
+#### Express Checkout
+
+- The capture method is now passed as a top-level Stripe Elements option instead of a per-payment-method option. This resolves Express Checkout initialization failures when the capture mode is set to manual.
+
+#### PaaS Commerce events
+
+- The installation adds an `ensure-stripe-commerce-events` step that removes and re-adds the order, invoice, and credit memo event subscriptions so that they are bound to the Stripe events provider. The step is skipped on SaaS.
+- A **[PaaS Only]** troubleshooting section, "Commerce Events Not Firing", documents how to verify and re-create the subscriptions with `bin/magento`.
+
+#### Compatibility and maintenance
+
+- The supported Node.js versions are `>=22.23.4 <23.0.0` and `>=24.22.1 <25.0.0`.
+- Dependencies were updated to address `npm audit` findings.
+- Legacy manual setup scripts for events and payment methods were retired from the npm scripts and archived as historical reference. Installation and configuration are performed through App Management.
+- The app version is aligned at 1.2.1 across the App Management configuration, the extension manifest, the package metadata, and the Stripe application info reported to Stripe.
+- A `deploy` npm script was added (`aio app deploy --force-build --force-deploy`).
+
+### Version 1.1.0
+
+Version 1.1.0 introduced installation and configuration through Adobe Commerce App Management, including the Business Configuration form, generated Commerce event subscriptions, and the App Management installation flow for SaaS and PaaS.
